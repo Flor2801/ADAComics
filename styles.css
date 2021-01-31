@@ -1,0 +1,99 @@
+@import url("https://fonts.googleapis.com/css2?family=Bangers&display=swap");
+footer, .paginador, .titulo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contenedor-resultados, .total-resultado, .caja-filtros {
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+body {
+  margin: 0px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+.titulo {
+  background-color: black;
+  width: 100vw;
+  height: 50px;
+}
+.titulo div {
+  background-color: red;
+  color: white;
+  font-family: "Bangers", cursive;
+  width: 200px;
+  height: 100%;
+  font-size: 45px;
+}
+.titulo div p {
+  margin: 0px;
+  text-align: center;
+}
+
+.fondo {
+  width: 100vw;
+  height: 400px;
+  background-color: yellow;
+  overflow: hidden;
+}
+.fondo img {
+  width: 100%;
+  position: relative;
+  top: -150px;
+}
+
+.caja-filtros {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.caja-filtros .contenedor-filtros {
+  display: flex;
+  direction: wrap;
+  justify-content: space-between;
+}
+.caja-filtros .contenedor-filtros .filtros {
+  display: flex;
+}
+.caja-filtros .contenedor-filtros .search-texto .fas {
+  color: black;
+  font-size: 30px;
+}
+
+.contenedor-resultados {
+  background-color: blue;
+  height: 900px;
+}
+
+.paginador {
+  height: 50px;
+  margin-top: 10px;
+  padding-bottom: 100px;
+}
+.paginador button {
+  width: 40px;
+  height: 40px;
+  background-color: black;
+  margin: 5px;
+  border: none;
+  border-style: none;
+}
+.paginador button .fas {
+  color: white;
+  font-size: 20px;
+}
+
+footer {
+  background-color: black;
+  width: 100vw;
+  height: 80px;
+}
+footer p {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-weight: 600;
+  color: white;
+}
+
+/*# sourceMappingURL=styles.css.map */

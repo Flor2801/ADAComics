@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="path/to/bootstrap/css/bootstrap.min.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+    />
+    <title>ADAComics</title>
+  </head>
+  <body>
+    <!-- HOME PRINCIPAL -->
+    <section class="home">
+      <div class="titulo">
+        <div><p>ADAComics</p></div>
+      </div>
+      <div class="fondo"><img src="hero.jpg" /></div>
+    </section>
+
+    <!-- FITROS -->
+    <section class="caja-filtros">
+      <div><p>Búsqueda</p></div>
+
+      <div class="contenedor-filtros">
+        <div class="search-texto">
+          <i class="fas fa-search"></i>
+          <input type="text" placeholder="Ingresa tu búsqueda" />
+        </div>
+
+        <div class="filtros">
+          <p>Tipo</p>
+          <select>
+            <option>CÓMICS</option>
+            <option>PERSONAJES</option>
+          </select>
+          <p>Orden</p>
+          <select>
+            <option>A-Z</option>
+            <option>Z-A</option>
+            <option>Más nuevos</option>
+            <option>Mas viejos</option>
+          </select>
+          <button>BUSCAR</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESULTADOS -->
+    <div class="total-resultado">
+      <div><p>Resultados</p></div>
+      <div><p id="filtrado">0</p></div>
+    </div>
+    <section>
+      <div class="contenedor-resultados">
+        <div class="comic"></div>
+        <div class="superheroe"></div>
+      </div>
+    </section>
+
+    <!-- PAGINADOR -->
+    <div class="paginador">
+      <button><i class="fas fa-angle-double-left"></i></button>
+      <button><i class="fas fa-angle-left"></i></button>
+      <button><i class="fas fa-angle-right"></i></button>
+      <button><i class="fas fa-angle-double-right"></i></button>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer">
+        <div><p>Hecho con ❤️ por ADA</p></div>
+      </div>
+    </footer>
+  </body>
+</html>
