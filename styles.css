@@ -64,15 +64,38 @@ body {
 
 .contenedor-resultados {
   background-color: white;
-}
-.contenedor-resultados article {
-  width: 230px;
-  height: 380px;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
 }
-.contenedor-resultados article .imagen {
-  height: 30%;
+.contenedor-resultados .card {
+  width: 200px;
+  height: 380px;
+  background-color: black;
+  color: white;
+  margin: 10px;
+}
+.contenedor-resultados .card:hover {
+  background-color: red;
+}
+.contenedor-resultados .card:hover .imagen {
+  overflow: hidden;
+}
+.contenedor-resultados .card:hover .imagen img {
+  transform: scale(1.2);
+}
+.contenedor-resultados .card h2 {
+  font-size: 15px;
+}
+.contenedor-resultados .card p {
+  font-size: 10px;
+}
+.contenedor-resultados .card .imagen {
+  height: 250px;
+  overflow: hidden;
+}
+.contenedor-resultados .card .imagen img {
+  height: 80%;
 }
 .contenedor-resultados .superheroe {
   width: 200px;

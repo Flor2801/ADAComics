@@ -78,17 +78,42 @@ body {
 .contenedor-resultados {
   @extend %margin;
   background-color: white;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
 
-
-  article {
-    width: 230px;
+  .card {
+    width: 200px;
     height: 380px;
-    display: flex;
-    flex-direction: column;
+    background-color: black;
+    color: white;
+    margin: 10px;
+
+    &:hover {
+      background-color: red;
+      .imagen {
+          overflow: hidden;
+        img {
+          transform: scale(1.2);
+        }
+      }
+    }
+
+    h2 {
+      font-size: 15px;
+    }
+
+    p {
+      font-size: 10px;
+    }
 
     .imagen {
-      height: 30%;
+      height: 250px;
+      overflow: hidden;
 
+      img {
+        height: 80%;
+      }
     }
   }
 
