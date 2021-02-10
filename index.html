@@ -23,12 +23,12 @@
 
     <!-- FITROS -->
     <section class="caja-filtros">
-      <div><p>Búsqueda</p></div>
+      <div><h1>Búsqueda</h1></div>
 
       <div class="contenedor-filtros">
         <div class="search-texto">
           <i class="fas fa-search"></i>
-          <input type="text" placeholder="Ingresa tu búsqueda" />
+          <input type="text" placeholder="Ingresa tu búsqueda" id="busqueda-por-texto" />
         </div>
 
         <div class="filtros">
@@ -38,21 +38,21 @@
             <option>PERSONAJES</option>
           </select>
           <p>Orden</p>
-          <select>
+          <select id="orden-elegido">
             <option>A-Z</option>
             <option>Z-A</option>
             <option>Más nuevos</option>
             <option>Mas viejos</option>
           </select>
-          <button>BUSCAR</button>
+          <button id="buscar">BUSCAR</button>
         </div>
       </div>
     </section>
 
     <!-- RESULTADOS -->
     <div class="total-resultado">
-      <div><p>Resultados</p></div>
-      <div><p id="filtrado">0</p></div>
+      <div><h1>Resultados</h1></div>
+      <div><span id="filtrado">0</span><span>RESULTADOS</span></div>
     </div>
     <section>
       <div class="contenedor-resultados" id="resultados">

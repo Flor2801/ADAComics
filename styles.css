@@ -6,13 +6,18 @@ footer, .paginador, .titulo {
 }
 
 .contenedor-resultados, .total-resultado, .caja-filtros {
-  margin-left: 50px;
-  margin-right: 50px;
+  margin-left: 100px;
+  margin-right: 100px;
 }
 
 body {
   margin: 0px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+h1 {
+  font-size: 23px;
+  font-weight: bold;
 }
 
 .titulo {
@@ -62,6 +67,16 @@ body {
   font-size: 30px;
 }
 
+.total-resultado {
+  margin-bottom: 30px;
+}
+.total-resultado span {
+  font-size: 13px;
+  color: gray;
+  font-weight: bold;
+  margin-right: 20px;
+}
+
 .contenedor-resultados {
   background-color: white;
   display: flex;
@@ -71,31 +86,25 @@ body {
 .contenedor-resultados .card {
   width: 200px;
   height: 380px;
-  background-color: black;
-  color: white;
+  background-color: white;
+  color: black;
   margin: 10px;
 }
-.contenedor-resultados .card:hover {
-  background-color: red;
-}
-.contenedor-resultados .card:hover .imagen {
-  overflow: hidden;
-}
 .contenedor-resultados .card:hover .imagen img {
-  transform: scale(1.2);
+  transform: translate(0, 20);
 }
 .contenedor-resultados .card h2 {
-  font-size: 15px;
+  font-size: 12px;
 }
 .contenedor-resultados .card p {
   font-size: 10px;
 }
 .contenedor-resultados .card .imagen {
-  height: 250px;
+  height: 300px;
   overflow: hidden;
 }
 .contenedor-resultados .card .imagen img {
-  height: 80%;
+  height: 100%;
 }
 .contenedor-resultados .superheroe {
   width: 200px;
