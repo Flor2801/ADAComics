@@ -12,6 +12,7 @@
     />
     <title>ADAComics</title>
   </head>
+
   <body>
     <!-- HOME PRINCIPAL -->
     <section class="home">
@@ -27,8 +28,7 @@
 
       <div class="contenedor-filtros">
         <div class="search-texto">
-          <i class="fas fa-search"></i>
-          <input type="text" placeholder="Ingresa tu búsqueda" id="busqueda-por-texto" />
+          <i class="fas fa-search"></i><input type="text" placeholder="Ingresa tu búsqueda" id="busqueda-por-texto"/>
         </div>
 
         <div class="filtros">
@@ -39,10 +39,10 @@
           </select>
           <p>Orden</p>
           <select id="orden-elegido">
-            <option>A-Z</option>
-            <option>Z-A</option>
-            <option>Más nuevos</option>
-            <option>Mas viejos</option>
+            <option value="A-Z">A-Z</option>
+            <option value="Z-A">Z-A</option>
+            <option value="mas nuevos">Más nuevos</option>
+            <option value="mas viejos">Mas viejos</option>
           </select>
           <button id="buscar">BUSCAR</button>
         </div>
@@ -67,6 +67,7 @@
       <button id="last"><i class="fas fa-angle-double-right"></i></button>
       <a href="" id="proximo">PROXIMA</a>
     </div>
+ 
 
     <!-- FOOTER -->
     <footer>
