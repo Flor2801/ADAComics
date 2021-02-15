@@ -110,13 +110,28 @@ const filtradoInputLleno = (tipo, orden, texto) => {
 
   // SI EL INPUT DE TEXTO ESTA VACIO buscara por TIPO Y ORDEN
 const filtradoInputVacio = (tipo, orden) => {
+  if ((tipo = "comics")) {
   fetch(`${urlBase + tipo}?apikey=${apiKey}&orderBy=${orden}`)
     .then((res) => {
       return res.json();
     })
     .then((info) => {
-      mostrarPersonajes(info);
+      mostrarComics(info);
     });
+
+  }
+  else if ((tipo = "personajes")) {
+    fetch(`${urlBase + tipo}?apikey=${apiKey}&orderBy=${orden}`
+    )
+      .then((res) => {
+        return res.json();
+      })
+      .then((info) => {
+        mostrarPersonajes(info);
+      });
+  }
+
+
 };
 
 
@@ -227,6 +242,22 @@ botonBuscar.onclick = () => {
 
     filtradoInputVacio(valorTipo, valorOrden);
   }
+
+  
+  if (input.value !== "" && tipo.value === "comics" && orden.value !== "") {
+    let valorOrden = "";
+    let valorTipo = "comics"
+    let valorTexto = input.value
+
+    if (orden.value == "mas viejos") {
+      valorOrden = "-onsaleDate";
+    }
+    else if (orden.value == "mas nuevos") {
+      valorOrden = "onsaleDate";
+    }
+
+    filtradoInputLleno(valorTipo, valorOrden, valorTexto);
+  }
 };
 
 /////////////////// SELECCIONAR TARJETA PARA VER DETALLE ////////////////////////////
@@ -319,6 +350,11 @@ botonBuscar.onclick = () => {
 /////////////////// SELECCIONAR TARJETA PARA VER DETALLE ////////////////////////////
 
 //////////////////////////////   PAGINADO  ////////////////////////////
+
+// const primeraPagina = document.getElementById("first") 
+// const primeraPagina = document.getElementById("previous")
+// const primeraPagina = document.getElementById("next")
+// const primeraPagina = document.getElementById("last")
 
 let numeroDePagina = 0
 
