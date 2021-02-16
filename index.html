@@ -33,17 +33,19 @@
 
         <div class="filtros">
           <p>Tipo</p>
-          <select id="tipo-elegido">
+          <form name=f1>
+          <select id="tipo-elegido" name="blabla" onchange="cambiaOpcion()">
             <option value="comics">CÓMICS</option>
-            <option value="personajes">PERSONAJES</option>
+            <option value="characters">PERSONAJES</option>
           </select>
           <p>Orden</p>
-          <select id="orden-elegido">
-            <option value="A-Z">A-Z</option>
-            <option value="Z-A">Z-A</option>
-            <option value="mas nuevos">Más nuevos</option>
-            <option value="mas viejos">Mas viejos</option>
+          <select id="orden-elegido" name="variable">
+            <option value="title" name="titulo">A-Z</option>
+            <option value="-title" name="-titulo">Z-A</option>
+            <option value="-focDate" name="nuevos">Mas nuevos</option>
+            <option value="focDate" name="viejos">Mas viejos</option>
           </select>
+        </form>
           <button id="buscar">BUSCAR</button>
         </div>
       </div>
