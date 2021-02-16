@@ -1,48 +1,32 @@
+/// SELECCIONAR FILTROS
 const tipo = document.getElementById("tipo-elegido");
 const orden = document.getElementById("orden-elegido");
 const input = document.getElementById("busqueda-por-texto");
 
+
 const cambiaOpcion = () => {
- let opciones = orden.lenght
-
   if (tipo.value == "comics") {
+    let opciones = orden.length;
+    let i = 0;
     while (i < opciones) {
-      orden.remove(i);
+      orden.remove("option");
+      i++;
     }
- 
-
-    option0 = document.createElement("option");
-    option1 = document.createElement("option");
-    option2 = document.createElement("option");
-    option3 = document.createElement("option");
-    option0.value = "title";
-    option1.value = "-title";
-    option2.value = "-focDate";
-    option3.value = "focDacte";
-    option0.text = "A-Z";
-    option1.text = "Z-A";
-    option2.text = "Mas nuevos";
-    option3.text = "Mas viejos";
-    orden.add(option0);
-    orden.add(option1);
-    orden.add(option2);
-    orden.add(option3);
+    orden.innerHTML += `<option value="title">"A-Z"</option>`;
+    orden.innerHTML += `<option value="-title">"Z-A"</option>`;
+    orden.innerHTML += `<option value="-focDate">"Mas nuevos"</option>`;
+    orden.innerHTML += `<option value="focDate">"Mas viejos"</option>`;
   }
 
   if (tipo.value == "characters") {
-    orden.remove("option");
-    orden.remove("option");
-    orden.remove("option");
-    orden.remove("option");
-
-    option1 = document.createElement("option");
-    option2 = document.createElement("option");
-    option1.value = "name";
-    option2.value = "-name";
-    option1.text = "A-Z";
-    option2.text = "Z-A";
-    orden.add(option1);
-    orden.add(option2);
+    let opciones = orden.length;
+    let i = 0;
+    while (i < opciones) {
+      orden.remove("option");
+      i++;
+    }
+    orden.innerHTML += `<option value="name">"A-Z"</option>`;
+    orden.innerHTML += `<option value="-name">"Z-A"</option>`;
   }
 };
 
@@ -112,10 +96,9 @@ const urlBase = "https://gateway.marvel.com/v1/public/";
 const apiKey = "cdf503fce8f2c519f899f64cff25fd79";
 // BOTON BUSCAR DE ENVIO DEL FORM
 const botonBuscar = document.getElementById("buscar");
-// SELECTORES DE LOS FILTROS
+
 
 // SI EL INPUT DE TEXTO ESTA LLENO buscara por TIPO, ORDEN, TEXTO
-
 const filtradoInputLleno = (tipo, orden, texto) => {
   if (tipo == "comics") {
     fetch(
@@ -188,18 +171,9 @@ botonBuscar.onclick = () => {
 
 /////////////////// SELECCIONAR TARJETA PARA VER DETALLE ////////////////////////////
 
-//   personajes.map((info) => {
-//     resultados.innerHTML += `<article class="card"><div class="imagen"><img src="${info.thumbnail.path}.jpg" alt=""></div>
-// <div class="info">
-// <div class="nombre"><h2>${info.name}</h2></div></div>
-// </article>`;
-
-// Si elige comics y el input esta vacio, entonces filtra por orden alfabetico
-// Si elige comics y el input esta lleno, filtra por texto y orden
-
-// Si elije personajes y el input ....
-
-//     if (input.value ===
+// Seleccionar una tarjeta, hace clic en cualquier de ellas. Se borra todo el contenido del html.
+// Se crean 3 div con la imegen, info del comic o
+// Se ecran 2 divs, info del personajes.
 
 /////////////////// SELECCIONAR TARJETA PARA VER DETALLE ////////////////////////////
 
