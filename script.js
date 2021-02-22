@@ -142,11 +142,16 @@ mostrarComics = (info) => {
         })
         .then((info) => {
           let comicSeleccionado = info.data.results[0];
+          let fecha = comicSeleccionado.dates[0].date
+          let fechaCortada = fecha.slice(0, 10)
+          console.log(fecha)
+          console.log(info)
 
           resultados.innerHTML = `<div class="contenedor-detalle">
           <div id="info-detalle-primaria"><div id="info-detalle-primaria-imagen"><img src="${comicSeleccionado.thumbnail.path}/portrait_incredible.${comicSeleccionado.thumbnail.extension}" alt=""></div>
             <div id="info-detalle-primaria-data"><h2>${comicSeleccionado.title}</h2>
-            <h3>PUBLICADO:</h3><p>${comicSeleccionado.dates[0].date}</p><h3>GUIONISTAS:</h3><h3>DESCRIPCIÓN:</h3><p>${comicSeleccionado.description}</p></div>
+            <h3>PUBLICADO:</h3><p>${fechaCortada}</p><h3>GUIONISTAS:${comicSeleccionado.creators.items[0].name}</h3>
+            <h3>DESCRIPCIÓN:</h3><p>${comicSeleccionado.description}</p></div>
            </div> <div id="info-detalle-secundaria"></div></div>
           `;
 
@@ -171,7 +176,8 @@ mostrarComics = (info) => {
 
               personaje.forEach((personaje) => {
                 personaje.onclick = () => {
-                  mostrarPersonajes();
+                  let id = personaje.dataset.id
+                  fetchearPersonaje(id)
                 };
               });
             });
@@ -204,9 +210,11 @@ mostrarPersonajes = (info) => {
       console.log("me hicieron clic");
       resultados.innerHTML = "";
       totalComics.innerHTML = 0;
+     
 
+      const fetchearPersonaje = (id) => {
       fetch(
-        `https://gateway.marvel.com/v1/public/${personaje.dataset.id}/characters?apikey=${apiKey}`
+        `https://gateway.marvel.com/v1/public/characters/${id}?apikey=${apiKey}`
       )
         .then((res) => {
           return res.json();
@@ -214,37 +222,46 @@ mostrarPersonajes = (info) => {
         .then((info) => {
           console.log(info);
           let personajeSeleccionado = info.data.results;
+          console.log(personajeSeleccionado)
 
-          resultados.innerHTML = `<div class="imagen"><img src="${personajeSeleccionado.thumbnail.path}/portrait_incredible.${personajeSeleccionado.thumbnail.extension}" alt=""></div>
-        <div class="nombre"><h2>${personajeSeleccionado.name}</h2></div>`;
+        resultados.innerHTML = `<div class="imagen"><img src="${personajeSeleccionado[0].thumbnail.path}/portrait_incredible.${personajeSeleccionado[0].thumbnail.extension}" alt=""></div>
+        <div class="nombre"><h2>${personajeSeleccionado[0].name}</h2></div>
+        <div><h3>${personajeSeleccionado[0].description}</h3></div>
+        </div> <div id="info-detalle-secundaria"></div></div>`;
         });
 
-      // fetch(
-      //   `https://gateway.marvel.com/v1/public/characters/${personaje.dataset.id}/comics?apikey=${apiKey}`
-      // )
-      //   .then((res) => {
-      //     return res.json();
-      //   })
-      //   .then((info) => {
-      //     console.log(info);
-      //     let aparicionPersonaje = info.data.results;
-      //     personajeSeleccionado.map
+      fetch(
+        `https://gateway.marvel.com/v1/public/characters/${personaje.dataset.id}/comics?apikey=${apiKey}`
+      )
+        .then((res) => {
+          return res.json();
+        })
+        .then((info) => {
+          console.log(info);
+          let participacionPersonaje = info.data.results;
+          console.log(participacionPersonaje)
 
+           let resultadosComics = document.getElementById(
+                "info-detalle-secundaria"
+          );
+          
+          participacionPersonaje.map((tarjetas) => {
+            return (resultadosComics.innerHTML += `           
+              <div id="info-tarjeta-personaje" data-id=${tarjetas.title}> <div><img src="${tarjetas.thumbnail.path}/portrait_large.${tarjetas.thumbnail.extension}" alt=""></div>
+              <div id="info-tarjeta-personaje-name"><p>${tarjetas.title}<p></div></div>`);
+          });
+        }
 
-      //     personaje.map((tarjetas) => {
-      //       return (resultadosPersonajes.innerHTML += `           
-      //         <div id="info-tarjeta-personaje" data-id=${tarjeta.id}> <div><img src="${tarjetas.thumbnail.path}/portrait_large.${tarjetas.thumbnail.extension}" alt=""></div>
-      //         <div id="info-tarjeta-personaje-name"><p>${tarjetas.name}<p></div></div>`);
-      //     });
-
-      //     personaje.forEach((personaje) => {
-      //       personaje.onclick = () => {
-      //         mostrarPersonajes();
-      //       };
-        //   });
+          // personaje.forEach((personaje) => {
+          //   personaje.onclick = () => {
+          //     mostrarPersonajes();
+            // };
+          // });
         // });
-    };
-  });
+        )};
+        fetchearPersonaje(personaje.dataset.id)
+  };
+});
 };
 
 // boton primera pagina: pagina 1, offset 0 (pagina = total / 20) (offset numeros de pagina * 20)
