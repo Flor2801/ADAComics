@@ -1,8 +1,14 @@
+const volver = document.getElementById("volver");
+console.log("volver");
+
+// volver.onclick = () => {
+//   window.history.back();
+// }
+
 /// SELECCIONAR FILTROS
 const tipo = document.getElementById("tipo-elegido");
 const orden = document.getElementById("orden-elegido");
 const input = document.getElementById("busqueda-por-texto");
-
 
 const cambiaOpcion = () => {
   if (tipo.value == "comics") {
@@ -12,10 +18,10 @@ const cambiaOpcion = () => {
       orden.remove("option");
       i++;
     }
-    orden.innerHTML += `<option value="title">"A-Z"</option>`;
-    orden.innerHTML += `<option value="-title">"Z-A"</option>`;
-    orden.innerHTML += `<option value="-focDate">"Mas nuevos"</option>`;
-    orden.innerHTML += `<option value="focDate">"Mas viejos"</option>`;
+    orden.innerHTML += `<option value="title">A-Z</option>`;
+    orden.innerHTML += `<option value="-title">Z-A</option>`;
+    orden.innerHTML += `<option value="-focDate">Mas nuevos</option>`;
+    orden.innerHTML += `<option value="focDate">Mas viejos</option>`;
   }
 
   if (tipo.value == "characters") {
@@ -25,8 +31,8 @@ const cambiaOpcion = () => {
       orden.remove("option");
       i++;
     }
-    orden.innerHTML += `<option value="name">"A-Z"</option>`;
-    orden.innerHTML += `<option value="-name">"Z-A"</option>`;
+    orden.innerHTML += `<option value="name">A-Z</option>`;
+    orden.innerHTML += `<option value="-name">Z-A</option>`;
   }
 };
 
@@ -42,16 +48,74 @@ mostrarComics = (info) => {
   resultados.innerHTML = "";
 
   comic.map((info) => {
-    resultados.innerHTML += `<article class="card"><div class="imagen"><img src="${info.thumbnail.path}/portrait_incredible.${info.thumbnail.extension}" alt=""></div>
+    resultados.innerHTML += `<article class="card" data-id=${info.id}><div class="imagen"><img src="${info.thumbnail.path}/portrait_incredible.${info.thumbnail.extension}" alt=""></div>
     <div class="info"><div class="nombre"><h2>${info.title}</h2></div></div></article>`;
   });
 
-  const tarjeta = document.querySelectorAll("article");
-  console.log(tarjeta);
+  const tarjeta = document.querySelectorAll(".card");
 
-  tarjeta.forEach((article) => {
-    article.onclick = () => {
-      console.log("me hicieron clic");
+  /////////////////// SELECCIONAR TARJETA PARA VER DETALLE ////////////////////////////
+
+  // Seleccionar una tarjeta, hace clic en cualquier de ellas. Se borra todo el contenido del html.
+  // Se crean 3 div con la imegen, info del comic o
+  // Se crean 2 divs, info del personajes.
+
+  tarjeta.forEach((tarjeta) => {
+    tarjeta.onclick = () => {
+      resultados.innerHTML = "";
+      totalComics.innerHTML = 0;
+      console.log(tarjeta.dataset.id);
+
+      fetch(
+        `https://gateway.marvel.com/v1/public/comics/${tarjeta.dataset.id}?apikey=${apiKey}`
+      )
+        .then((res) => {
+          return res.json();
+        })
+        .then((info) => {
+          let comicSeleccionado = info.data.results[0];
+          console.log(comicSeleccionado);
+
+          // let fecha = `${comicSeleccionado.dates[0].date}`
+          // let nuevaFecha =  fecha.toLocaleDateString()
+
+          resultados.innerHTML = `<div class="contenedor-detalle">
+          <div id="info-detalle-primaria">
+            <div id="info-detalle-primaria-imagen"><img src="${comicSeleccionado.thumbnail.path}/portrait_incredible.${comicSeleccionado.thumbnail.extension}" alt=""></div>
+            <div id="info-detalle-primaria-data"><h2>${comicSeleccionado.title}</h2>
+            <h3>PUBLICADO:</h3><p>${comicSeleccionado.dates[0].date}</p>
+            <h3>GUIONISTAS:</h3>
+            <h3>DESCRIPCIÓN:</h3><p>${comicSeleccionado.description}</p></div>
+           </div> 
+           <div id="info-detalle-secundaria"></div>
+           </div>
+          `;
+
+          fetch(
+            `https://gateway.marvel.com/v1/public/comics/${tarjeta.dataset.id}/characters?apikey=${apiKey}`
+          )
+            .then((res) => {
+              return res.json();
+            })
+            .then((info) => {
+              console.log(info);
+              let personaje = info.data.results;
+              let resultadosPersonajes = document.getElementById(
+                "info-detalle-secundaria"
+              );
+
+              personaje.map((tarjetas) => {
+                return (resultadosPersonajes.innerHTML += `           
+                <div id="info-tarjeta-personaje" data-id=${tarjeta.id}> 
+                <div><img src="${tarjetas.thumbnail.path}/portrait_large.${tarjetas.thumbnail.extension}" alt=""></div>
+                <div id="info-tarjeta-personaje-name"><p>${tarjetas.name}<p></div>
+                </div>
+                `);
+              });
+ 
+         
+            });
+        });
     };
   });
 };
@@ -68,8 +132,22 @@ mostrarPersonajes = (info) => {
   resultados.innerHTML = "";
 
   personajes.map((info) => {
-    resultados.innerHTML += `<article class="card"><div class="imagen"><img src="${info.thumbnail.path}/portrait_incredible.${info.thumbnail.extension}" alt=""></div>
+    resultados.innerHTML += `<article class="card" data=${info.id}><div class="imagen"><img src="${info.thumbnail.path}/portrait_incredible.${info.thumbnail.extension}" alt=""></div>
     <div class="info"> <div class="nombre"><h2>${info.name}</h2></div></div></article>`;
+  });
+
+  // boton primera pagina: pagina 1, offset 0 (pagina = total / 20) (offset numeros de pagina * 20)
+  // boton anterior pagina: suma 1 pagina, multiplica pags por 20 (offset)
+  // boton proxima pagina: suma 1 pagina, multiplica pags por 20 (offset)
+  // boton ultima pagina: al total de resultados, le resta 20, hace offset con ese valor
+
+  const personaje = document.querySelectorAll("article");
+  personaje.forEach((personaje) => {
+    personaje.onclick = () => {
+      console.log("me hicieron clic");
+      resultados.innerHTML = "";
+      totalComics.innerHTML = 0;
+    };
   });
 };
 
@@ -83,6 +161,7 @@ fetch(
   })
   .then((info) => {
     mostrarComics(info);
+    console.log(info);
   });
 
 ////////////////////////   FILTROS DE BUSQUEDA  ////////////////////////
@@ -96,7 +175,6 @@ const urlBase = "https://gateway.marvel.com/v1/public/";
 const apiKey = "cdf503fce8f2c519f899f64cff25fd79";
 // BOTON BUSCAR DE ENVIO DEL FORM
 const botonBuscar = document.getElementById("buscar");
-
 
 // SI EL INPUT DE TEXTO ESTA LLENO buscara por TIPO, ORDEN, TEXTO
 const filtradoInputLleno = (tipo, orden, texto) => {
@@ -153,32 +231,9 @@ const filtradoInputVacio = (tipo, orden) => {
 botonBuscar.onclick = () => {
   ///////////// INPUT VACIO buscara por TIPO Y ORDEN
   ///////////// INPUT LLENO buscara por TIPO, ORDEN Y TEXTO
-
-  if (tipo.value === "comics") {
-    if (input.value === "") {
-      filtradoInputVacio(tipo.value, orden.value);
-    } else if (input.value !== "") {
-      filtradoInputLleno(tipo.value, orden.value, input.value);
-    }
-  } else if (tipo.value === "characters") {
-    if (input.value === "") {
-      filtradoInputVacio(tipo.value, orden.value);
-    } else if (input.value !== "") {
-      filtradoInputLleno(tipo.value, orden.value, input.value);
-    }
+  if (input.value === "") {
+    filtradoInputVacio(tipo.value, orden.value);
+  } else if (input.value !== "") {
+    filtradoInputLleno(tipo.value, orden.value, input.value);
   }
 };
-
-/////////////////// SELECCIONAR TARJETA PARA VER DETALLE ////////////////////////////
-
-// Seleccionar una tarjeta, hace clic en cualquier de ellas. Se borra todo el contenido del html.
-// Se crean 3 div con la imegen, info del comic o
-// Se ecran 2 divs, info del personajes.
-
-/////////////////// SELECCIONAR TARJETA PARA VER DETALLE ////////////////////////////
-
-//////////////////////////////   PAGINADO  ////////////////////////////
-
-////////////////////////   MOSTRAR DETALLE DE COMIC   ////////////////////////
-
-////////////////////////   MOSTRAR DETALLE DE PERSONAJE   ////////////////////////
