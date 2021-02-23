@@ -1,15 +1,14 @@
 // FECTH INCIAL PARA CARGAR LA PAGINA (muestra cómics)
-
 fetch(
-  "https://gateway.marvel.com:443/v1/public/comics?apikey=cdf503fce8f2c519f899f64cff25fd79&orderBy=title"
+  "https://gateway.marvel.com:443/v1/public/comics?apikey=cdf503fce8f2c519f899f64cff25fd79&orderBy=title&offset=0"
 )
   .then((data) => {
     return data.json();
   })
   .then((info) => {
     mostrarComics(info);
-    console.log(info);
   });
+ 
 
 ////////////////////////   FILTROS DE BUSQUEDA  ////////////////////////
 
@@ -47,6 +46,19 @@ const cambiaOpcion = () => {
     orden.innerHTML += `<option value="-name">Z-A</option>`;
   }
 };
+
+// boton primera pagina: pagina 1, offset 0 (pagina = total / 20) (offset numeros de pagina * 20)
+// boton anterior pagina: suma 1 pagina, multiplica pags por 20 (offset)
+// boton proxima pagina: suma 1 pagina, multiplica pags por 20 (offset)
+// boton ultima pagina: al total de resultados, le resta 20, hace offset con ese valor
+
+
+// let pagina = 
+// const botonPrimeraPagina = document.getElementById("first")
+// const botonPaginaAnterior = document.getElementById("previous")
+// const botonProximaPagina = document.getElementById("next")
+// const botonUltimaPagina = document.getElementById("last")
+
 
 // DATOS DE LA URL DEL FETCH DE MARVEL
 const urlBase = "https://gateway.marvel.com/v1/public/";
@@ -174,9 +186,9 @@ mostrarComics = (info) => {
                 <div id="info-tarjeta-personaje-name"><p>${tarjetas.name}<p></div></div>`);
               });
 
-              const tarjetas = document.querySelectorAll(
-                "#info-tarjeta-personaje"
-              );
+              // const tarjetas = document.querySelectorAll(
+              //   "#info-tarjeta-personaje"
+              // );
 
               // tarjetas.forEach((tarjeta) => {
               //   tarjeta.onclick = () => {
@@ -255,12 +267,6 @@ mostrarPersonajes = (info) => {
           <div id="info-tarjeta-comic-title"><p>${tarjetas.title}<p></div></div>`);
             });
           });
-      
     };
   });
 };
-
-// boton primera pagina: pagina 1, offset 0 (pagina = total / 20) (offset numeros de pagina * 20)
-// boton anterior pagina: suma 1 pagina, multiplica pags por 20 (offset)
-// boton proxima pagina: suma 1 pagina, multiplica pags por 20 (offset)
-// boton ultima pagina: al total de resultados, le resta 20, hace offset con ese valor
