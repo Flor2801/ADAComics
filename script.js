@@ -8,7 +8,6 @@ fetch(
   .then((info) => {
     mostrarComics(info);
   });
- 
 
 ////////////////////////   FILTROS DE BUSQUEDA  ////////////////////////
 
@@ -52,13 +51,12 @@ const cambiaOpcion = () => {
 // boton proxima pagina: suma 1 pagina, multiplica pags por 20 (offset)
 // boton ultima pagina: al total de resultados, le resta 20, hace offset con ese valor
 
-
-// let pagina = 
-// const botonPrimeraPagina = document.getElementById("first")
-// const botonPaginaAnterior = document.getElementById("previous")
-// const botonProximaPagina = document.getElementById("next")
-// const botonUltimaPagina = document.getElementById("last")
-
+let paginaActual = 0;
+let resultadosPorPagina = 20;
+const botonPrimeraPagina = document.getElementById("first");
+const botonPaginaAnterior = document.getElementById("previous");
+const botonProximaPagina = document.getElementById("next");
+const botonUltimaPagina = document.getElementById("last");
 
 // DATOS DE LA URL DEL FETCH DE MARVEL
 const urlBase = "https://gateway.marvel.com/v1/public/";
@@ -67,7 +65,7 @@ const botonBuscar = document.getElementById("buscar");
 
 // SI EL INPUT DE TEXTO ESTA VACIO buscara por TIPO Y ORDEN
 const filtradoInputVacio = (tipo, orden) => {
-  fetch(`${urlBase + tipo}?apikey=${apiKey}&orderBy=${orden}&offset=0`)
+  fetch(`${urlBase + tipo}?apikey=${apiKey}&orderBy=${orden}&offset=${paginaActual * 20}`)
     .then((res) => {
       return res.json();
     })
@@ -86,7 +84,7 @@ const filtradoInputLleno = (tipo, orden, texto) => {
     fetch(
       `${
         urlBase + tipo
-      }?apikey=${apiKey}&orderBy=${orden}&titleStartsWith=${texto}`
+      }?apikey=${apiKey}&orderBy=${orden}&titleStartsWith=${texto}&offset=${paginaActual * 20}`
     )
       .then((res) => {
         return res.json();
@@ -109,6 +107,46 @@ const filtradoInputLleno = (tipo, orden, texto) => {
   }
 };
 
+
+////////////////////////  PAGINADO  //////////////////////////
+
+
+botonPrimeraPagina.onclick = () => {
+  paginaActual = 0;
+  if (input.value === "") {
+    filtradoInputVacio(tipo.value, orden.value);
+  } else if (input.value !== "") {
+    filtradoInputLleno(tipo.value, orden.value, input.value);
+  }
+};
+
+botonPaginaAnterior.onclick = () => {
+  paginaActual--;
+  if (input.value === "") {
+    filtradoInputVacio(tipo.value, orden.value);
+  } else if (input.value !== "") {
+    filtradoInputLleno(tipo.value, orden.value, input.value);
+  }
+};
+
+botonProximaPagina.onclick = () => {
+  paginaActual++;
+  if (input.value === "") {
+    filtradoInputVacio(tipo.value, orden.value);
+  } else if (input.value !== "") {
+    filtradoInputLleno(tipo.value, orden.value, input.value);
+  }
+};
+
+// botonUltimaPagina.onclick = () => {
+//   paginaActual++;
+//   if (input.value === "") {
+//     filtradoInputVacio(tipo.value, orden.value);
+//   } else if (input.value !== "") {
+//     filtradoInputLleno(tipo.value, orden.value, input.value);
+//   }
+// };
+
 ///////////////// EJECUCION DE COMBINACIONES DE FILTROS DE BUSQUEDA  /////////////////
 
 botonBuscar.onclick = () => {
@@ -127,6 +165,7 @@ mostrarComics = (info) => {
   let comic = info.data.results;
   const resultados = document.getElementById("resultados");
   const totalComics = document.getElementById("filtrado");
+  console.log(info);
 
   totalComics.innerHTML = `${info.data.total}`;
 
@@ -136,6 +175,12 @@ mostrarComics = (info) => {
     resultados.innerHTML += `<article class="card" data-id=${info.id}><div class="imagen"><img src="${info.thumbnail.path}/portrait_incredible.${info.thumbnail.extension}" alt=""></div>
     <div class="info"><div class="nombre"><h2>${info.title}</h2></div></div></article>`;
   });
+
+  //// paginado
+  //// El fetch inicial que muestra personajes tiene offset 0
+  /// Se resetea la pagina 0
+  /// se agregan las funciones de botones paginadores incluyendo la misma funcion que muestra personajes,
+  /// la funcion por ejemplo, mostrar personajes
 
   const tarjeta = document.querySelectorAll(".card");
 
@@ -227,46 +272,45 @@ mostrarPersonajes = (info) => {
       console.log("me hicieron clic");
       resultados.innerHTML = "";
       totalComics.innerHTML = 0;
-    
 
-        fetch(
-          `https://gateway.marvel.com/v1/public/characters/${personaje.dataset.id}?apikey=${apiKey}`
-        )
-          .then((res) => {
-            return res.json();
-          })
-          .then((info) => {
-            console.log(info);
-            let personajeSeleccionado = info.data.results;
-            console.log(personajeSeleccionado);
+      fetch(
+        `https://gateway.marvel.com/v1/public/characters/${personaje.dataset.id}?apikey=${apiKey}`
+      )
+        .then((res) => {
+          return res.json();
+        })
+        .then((info) => {
+          console.log(info);
+          let personajeSeleccionado = info.data.results;
+          console.log(personajeSeleccionado);
 
-            resultados.innerHTML = `<div class="imagen"><img src="${personajeSeleccionado[0].thumbnail.path}/portrait_incredible.${personajeSeleccionado[0].thumbnail.extension}" alt=""></div>
+          resultados.innerHTML = `<div class="imagen"><img src="${personajeSeleccionado[0].thumbnail.path}/portrait_incredible.${personajeSeleccionado[0].thumbnail.extension}" alt=""></div>
     <div class="nombre"><h2>${personajeSeleccionado[0].name}</h2></div>
     <div><h3>${personajeSeleccionado[0].description}</h3></div>
     </div> <div id="info-detalle-secundaria"></div></div>`;
-          });
+        });
 
-        fetch(
-          `https://gateway.marvel.com/v1/public/characters/${id}/comics?apikey=${apiKey}`
-        )
-          .then((res) => {
-            return res.json();
-          })
-          .then((info) => {
-            console.log(info);
-            let participacionPersonaje = info.data.results;
-            console.log(participacionPersonaje);
+      fetch(
+        `https://gateway.marvel.com/v1/public/characters/${id}/comics?apikey=${apiKey}`
+      )
+        .then((res) => {
+          return res.json();
+        })
+        .then((info) => {
+          console.log(info);
+          let participacionPersonaje = info.data.results;
+          console.log(participacionPersonaje);
 
-            let resultadosComics = document.getElementById(
-              "info-detalle-secundaria"
-            );
+          let resultadosComics = document.getElementById(
+            "info-detalle-secundaria"
+          );
 
-            participacionPersonaje.map((tarjetas) => {
-              return (resultadosComics.innerHTML += `           
+          participacionPersonaje.map((tarjetas) => {
+            return (resultadosComics.innerHTML += `           
           <div id="info-tarjeta-comic" data-id=${tarjetas.title}> <div><img src="${tarjetas.thumbnail.path}/portrait_large.${tarjetas.thumbnail.extension}" alt=""></div>
           <div id="info-tarjeta-comic-title"><p>${tarjetas.title}<p></div></div>`);
-            });
           });
+        });
     };
   });
 };
