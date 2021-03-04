@@ -8,7 +8,7 @@ fetch(
   .then((info) => {
     mostrarComics(info);
   });
-
+ 
 ////////////////////////   FILTROS DE BUSQUEDA  ////////////////////////
 
 // Luego de enviado el form (boton buscar) el sistema comprueba si el usuario selecciono "Comics" o "Personajes",
@@ -50,9 +50,10 @@ const cambiaOpcion = () => {
 // boton anterior pagina: suma 1 pagina, multiplica pags por 20 (offset)
 // boton proxima pagina: suma 1 pagina, multiplica pags por 20 (offset)
 // boton ultima pagina: al total de resultados, le resta 20, hace offset con ese valor
-
+let resultadosTotales = 0 
 let paginaActual = 0;
 let resultadosPorPagina = 20;
+let cantidadDePaginas = 0
 const botonPrimeraPagina = document.getElementById("first");
 const botonPaginaAnterior = document.getElementById("previous");
 const botonProximaPagina = document.getElementById("next");
@@ -71,9 +72,13 @@ const filtradoInputVacio = (tipo, orden) => {
     })
     .then((info) => {
       if (tipo == "comics") {
+        resultadosTotales = info.data.total 
+
         mostrarComics(info);
       } else if (tipo == "characters") {
+        resultadosTotales = info.data.total 
         mostrarPersonajes(info);
+
       }
     });
 };
@@ -90,6 +95,7 @@ const filtradoInputLleno = (tipo, orden, texto) => {
         return res.json();
       })
       .then((info) => {
+        resultadosTotales = info.data.total 
         mostrarComics(info);
       });
   } else if (tipo == "characters") {
@@ -102,6 +108,7 @@ const filtradoInputLleno = (tipo, orden, texto) => {
         return res.json();
       })
       .then((info) => {
+        resultadosTotales = info.data.total 
         mostrarPersonajes(info);
       });
   }
@@ -118,6 +125,7 @@ botonPrimeraPagina.onclick = () => {
   } else if (input.value !== "") {
     filtradoInputLleno(tipo.value, orden.value, input.value);
   }
+  // botonPrimeraPagina.disabled = true;
 };
 
 botonPaginaAnterior.onclick = () => {
@@ -138,14 +146,23 @@ botonProximaPagina.onclick = () => {
   }
 };
 
-// botonUltimaPagina.onclick = () => {
-//   paginaActual++;
-//   if (input.value === "") {
-//     filtradoInputVacio(tipo.value, orden.value);
-//   } else if (input.value !== "") {
-//     filtradoInputLleno(tipo.value, orden.value, input.value);
-//   }
-// };
+botonUltimaPagina.onclick = () => {
+  cantidadDePaginas = resultadosTotales/resultadosPorPagina
+  let resto = resultadosTotales%resultadosPorPagina
+  if (resto > 0) {
+    paginaActual = Math.floor(cantidadDePaginas)
+  }
+  else {
+    paginaActual = (resultadosTotales - resto) / resultadosPorPagina
+  }
+  if (input.value === "") {
+    filtradoInputVacio(tipo.value, orden.value);
+  } else if (input.value !== "") {
+    filtradoInputLleno(tipo.value, orden.value, input.value);
+  }
+};
+
+
 
 ///////////////// EJECUCION DE COMBINACIONES DE FILTROS DE BUSQUEDA  /////////////////
 
