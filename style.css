@@ -120,6 +120,9 @@ h1 {
   border: none;
   margin-top: 10px;
 }
+.caja-filtros .contenedor-filtros .search-texto #busqueda-por-texto:focus {
+  outline: none;
+}
 
 .total-resultado {
   margin-bottom: 30px;

@@ -135,8 +135,10 @@ h1 {
         width: 500px;
         height: 30px;
         border: none;
-
         margin-top: 10px;
+        &:focus {
+          outline: none;
+        }
       }
     }
   }

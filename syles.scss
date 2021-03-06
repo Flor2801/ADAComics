@@ -134,6 +134,10 @@ h1 {
   margin-top: 10px;
 }
 
+.caja-filtros .contenedor-filtros .search-texto #busqueda-por-texto:focus {
+  outline: none;
+}
+
 .total-resultado {
   margin-bottom: 30px;
   margin-top: 100px;
