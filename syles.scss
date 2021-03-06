@@ -10,7 +10,7 @@ footer, .paginador, .titulo {
   margin-right: 100px;
 }
 
-.total-resultado, .caja-filtros .contenedor-filtros .search-texto ::placeholder, .caja-filtros .contenedor-filtros .filtros #buscar, .caja-filtros .contenedor-filtros .filtros form select {
+.card-tarjeta-personaje .info, .contenedor-resultados .card .info .nombre, .total-resultado, .caja-filtros .contenedor-filtros .search-texto ::placeholder, .caja-filtros .contenedor-filtros .filtros #buscar, .caja-filtros .contenedor-filtros .filtros form select {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
@@ -150,6 +150,8 @@ h1 {
   background-color: white;
   display: flex;
   flex-wrap: wrap;
+  justify-content: flex-start;
+  flex-grow: 1;
   margin-bottom: 20px;
 }
 
@@ -158,34 +160,74 @@ h1 {
   height: 380px;
   background-color: white;
   color: black;
-  margin: 10px;
+  margin: 12px;
+  cursor: pointer;
 }
 
-.contenedor-resultados .card:hover .imagen img {
-  transform: translate(0, 20);
-}
-
-.contenedor-resultados .card h2 {
-  font-size: 12px;
-}
-
-.contenedor-resultados .card p {
-  font-size: 10px;
+.contenedor-resultados .card .info .nombre {
+  font-size: 20px;
+  color: #494949;
+  font-size: 13px;
+  font-weight: 600;
 }
 
 .contenedor-resultados .card .imagen {
   height: 300px;
   overflow: hidden;
+  box-shadow: 0px 15px 20px -10px gray;
+  margin-bottom: 20px;
+}
+
+.contenedor-resultados .card .imagen:hover {
+  transform: translateY(-20px);
+  transition: 0.3s;
 }
 
 .contenedor-resultados .card .imagen img {
-  height: 100%;
+  width: 100%;
 }
 
-.contenedor-resultados .superheroe {
-  width: 200px;
+.card-tarjeta-personaje {
+  width: 170px;
   height: 380px;
   background-color: red;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.card-tarjeta-personaje:hover .imagen img {
+  transform: scale(1.1);
+  transition: 0.2s;
+  overflow: hidden;
+}
+
+.card-tarjeta-personaje:hover .info {
+  color: black;
+  background-color: red;
+  transition: 0.2s;
+}
+
+.card-tarjeta-personaje .imagen {
+  height: 66%;
+  overflow: hidden;
+}
+
+.card-tarjeta-personaje .imagen img {
+  width: 100%;
+}
+
+.card-tarjeta-personaje .info {
+  height: 33%;
+  background-color: black;
+  color: white;
+  font-size: 10px;
+}
+
+.card-tarjeta-personaje .info .nombre {
+  margin-left: 15px;
 }
 
 .contenedor-detalle {
@@ -195,12 +237,20 @@ h1 {
 
 .contenedor-detalle #info-detalle-primaria {
   display: flex;
-  margin: 10px 0px 30px 0px;
+  margin: 10px 0px 60px 0px;
+}
+
+.contenedor-detalle #info-detalle-primaria #info-detalle-primaria-imagen {
+  width: 350px;
+}
+
+.contenedor-detalle #info-detalle-primaria #info-detalle-primaria-imagen img {
+  width: 100%;
 }
 
 .contenedor-detalle #info-detalle-primaria #info-detalle-primaria-data {
+  margin: 0 0 0 50px;
   max-width: 600px;
-  margin-left: 20px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
@@ -208,20 +258,25 @@ h1 {
   font-size: 15px;
 }
 
+.contenedor-detalle #info-detalle-primaria #info-detalle-primaria-data h2 {
+  margin-top: 0px;
+}
+
 .contenedor-detalle #info-detalle-secundaria {
-  background-color: blue;
   display: flex;
   flex-wrap: wrap;
-  max-width: 900px;
+  margin-bottom: 100px;
+}
+
+.contenedor-detalle #info-detalle-secundaria #info-detalle-secundaria-resultados p {
+  font-size: 15px;
+  color: gray;
+  font-weight: bold;
+  margin-right: 20px;
 }
 
 .contenedor-detalle #info-detalle-secundaria #info-tarjeta-personaje {
   margin: 10px;
-  background-color: red;
-}
-
-.contenedor-detalle #info-detalle-secundaria #info-tarjeta-personaje #info-tarjeta-personaje-name {
-  background-color: yellow;
 }
 
 .paginador {

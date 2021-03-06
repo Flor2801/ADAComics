@@ -189,15 +189,9 @@ mostrarComics = (info) => {
   resultados.innerHTML = "";
 
   comic.map((info) => {
-    resultados.innerHTML += `<article class="card" data-id=${info.id}><div class="imagen"><img src="${info.thumbnail.path}/portrait_incredible.${info.thumbnail.extension}" alt=""></div>
-    <div class="info"><div class="nombre"><h2>${info.title}</h2></div></div></article>`;
+    resultados.innerHTML += `<article class="card" data-id=${info.id}><div class="imagen"><img src="${info.thumbnail.path}/portrait_uncanny.${info.thumbnail.extension}" alt=""></div>
+    <div class="info"><div class="nombre"><p>${info.title}</p></div></div></article>`;
   });
-
-  //// paginado
-  //// El fetch inicial que muestra personajes tiene offset 0
-  /// Se resetea la pagina 0
-  /// se agregan las funciones de botones paginadores incluyendo la misma funcion que muestra personajes,
-  /// la funcion por ejemplo, mostrar personajes
 
   const tarjeta = document.querySelectorAll(".card");
 
@@ -218,15 +212,25 @@ mostrarComics = (info) => {
           let comicSeleccionado = info.data.results[0];
           let fecha = comicSeleccionado.dates[0].date;
           let fechaCortada = fecha.slice(0, 10);
-          console.log(fecha);
-          console.log(info);
 
           resultados.innerHTML = `<div class="contenedor-detalle">
-          <div id="info-detalle-primaria"><div id="info-detalle-primaria-imagen"><img src="${comicSeleccionado.thumbnail.path}/portrait_incredible.${comicSeleccionado.thumbnail.extension}" alt=""></div>
-            <div id="info-detalle-primaria-data"><h2>${comicSeleccionado.title}</h2>
-            <h3>PUBLICADO:</h3><p>${fechaCortada}</p><h3>GUIONISTAS:${comicSeleccionado.creators.items[0].name}</h3>
+          <div id="info-detalle-primaria">
+          <div id="info-detalle-primaria-imagen"><img src="${comicSeleccionado.thumbnail.path}/portrait_uncanny.${comicSeleccionado.thumbnail.extension}" alt=""></div>
+            <div id="info-detalle-primaria-data">
+            <h2>${comicSeleccionado.title}</h2>
+            <h3>PUBLICADO:</h3><p>${fechaCortada}</p>
+            <h3>GUIONISTAS:</h3><p>${comicSeleccionado.creators.items[0].name}</p>
             <h3>DESCRIPCIÓN:</h3><p>${comicSeleccionado.description}</p></div>
-           </div> <div id="info-detalle-secundaria"></div></div>
+           </div> 
+        
+           <div id="info-detalle-secundaria-resultados"><h2>Personajes</h2>
+           <p><span id="filtrado">0</span><span>RESULTADOS</span></p></div>
+
+           <div id="info-detalle-secundaria">
+          </div>
+           </div>
+
+           </div>
           `;
 
           fetch(
@@ -243,9 +247,8 @@ mostrarComics = (info) => {
               );
 
               personaje.map((tarjetas) => {
-                return (resultadosPersonajes.innerHTML += `           
-                <div id="info-tarjeta-personaje" data-id=${tarjeta.id}> <div><img src="${tarjetas.thumbnail.path}/portrait_large.${tarjetas.thumbnail.extension}" alt=""></div>
-                <div id="info-tarjeta-personaje-name"><p>${tarjetas.name}<p></div></div>`);
+                return (resultadosPersonajes.innerHTML += `<div class="card-tarjeta-personaje" data-id=${tarjeta.id}><div class="imagen"><img src="${tarjetas.thumbnail.path}/portrait_incredible.${tarjetas.thumbnail.extension}" alt=""></div>
+              <div class="info"> <div class="nombre"><h2>${tarjetas.name}</h2></div></div></div>`);
               });
 
               // const tarjetas = document.querySelectorAll(
@@ -276,7 +279,7 @@ mostrarPersonajes = (info) => {
   resultados.innerHTML = "";
 
   personajes.map((info) => {
-    resultados.innerHTML += `<article class="tarjeta-personaje" data-id=${info.id}><div class="imagen"><img src="${info.thumbnail.path}/portrait_incredible.${info.thumbnail.extension}" alt=""></div>
+    resultados.innerHTML += `<article class="card-tarjeta-personaje" data-id=${info.id}><div class="imagen"><img src="${info.thumbnail.path}/portrait_incredible.${info.thumbnail.extension}" alt=""></div>
     <div class="info"> <div class="nombre"><h2>${info.name}</h2></div></div></article>`;
   });
 
@@ -286,7 +289,6 @@ mostrarPersonajes = (info) => {
 
   personaje.forEach((personaje) => {
     personaje.onclick = () => {
-      console.log("me hicieron clic");
       resultados.innerHTML = "";
       totalComics.innerHTML = 0;
 
@@ -299,12 +301,30 @@ mostrarPersonajes = (info) => {
         .then((info) => {
           console.log(info);
           let personajeSeleccionado = info.data.results;
-          console.log(personajeSeleccionado);
 
-          resultados.innerHTML = `<div class="imagen"><img src="${personajeSeleccionado[0].thumbnail.path}/portrait_incredible.${personajeSeleccionado[0].thumbnail.extension}" alt=""></div>
-    <div class="nombre"><h2>${personajeSeleccionado[0].name}</h2></div>
-    <div><h3>${personajeSeleccionado[0].description}</h3></div>
-    </div> <div id="info-detalle-secundaria"></div></div>`;
+          resultados.innerHTML = 
+          
+          `<div class="contenedor-detalle">
+          <div id="info-detalle-primaria">
+          <div id="info-detalle-primaria-imagen"><img src="${personajeSeleccionado[0].thumbnail.path}/standard_fantastic.${personajeSeleccionado[0].thumbnail.extension}" alt=""></div>
+            <div id="info-detalle-primaria-data">
+            <h2>${personajeSeleccionado[0].name}</h2>
+            <p>${personajeSeleccionado[0].description}</p></div>
+           </div> 
+        
+           <div id="info-detalle-secundaria-resultados"><h2>Comics</h2>
+           <p><span id="filtrado">0</span><span>RESULTADOS</span></p></div>
+
+           <div id="info-detalle-secundaria">
+          </div>
+           </div>
+
+           </div>
+          `
+         
+
+    
+    ;
         });
 
       fetch(
