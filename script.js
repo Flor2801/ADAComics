@@ -8,7 +8,7 @@ fetch(
   .then((info) => {
     mostrarComics(info);
   });
- 
+
 ////////////////////////   FILTROS DE BUSQUEDA  ////////////////////////
 
 // Luego de enviado el form (boton buscar) el sistema comprueba si el usuario selecciono "Comics" o "Personajes",
@@ -50,10 +50,10 @@ const cambiaOpcion = () => {
 // boton anterior pagina: suma 1 pagina, multiplica pags por 20 (offset)
 // boton proxima pagina: suma 1 pagina, multiplica pags por 20 (offset)
 // boton ultima pagina: al total de resultados, le resta 20, hace offset con ese valor
-let resultadosTotales = 0 
+let resultadosTotales = 0;
 let paginaActual = 0;
 let resultadosPorPagina = 20;
-let cantidadDePaginas = 0
+let cantidadDePaginas = 0;
 const botonPrimeraPagina = document.getElementById("first");
 const botonPaginaAnterior = document.getElementById("previous");
 const botonProximaPagina = document.getElementById("next");
@@ -66,19 +66,22 @@ const botonBuscar = document.getElementById("buscar");
 
 // SI EL INPUT DE TEXTO ESTA VACIO buscara por TIPO Y ORDEN
 const filtradoInputVacio = (tipo, orden) => {
-  fetch(`${urlBase + tipo}?apikey=${apiKey}&orderBy=${orden}&offset=${paginaActual * 20}`)
+  fetch(
+    `${urlBase + tipo}?apikey=${apiKey}&orderBy=${orden}&offset=${
+      paginaActual * 20
+    }`
+  )
     .then((res) => {
       return res.json();
     })
     .then((info) => {
       if (tipo == "comics") {
-        resultadosTotales = info.data.total 
+        resultadosTotales = info.data.total;
 
         mostrarComics(info);
       } else if (tipo == "characters") {
-        resultadosTotales = info.data.total 
+        resultadosTotales = info.data.total;
         mostrarPersonajes(info);
-
       }
     });
 };
@@ -89,13 +92,15 @@ const filtradoInputLleno = (tipo, orden, texto) => {
     fetch(
       `${
         urlBase + tipo
-      }?apikey=${apiKey}&orderBy=${orden}&titleStartsWith=${texto}&offset=${paginaActual * 20}`
+      }?apikey=${apiKey}&orderBy=${orden}&titleStartsWith=${texto}&offset=${
+        paginaActual * 20
+      }`
     )
       .then((res) => {
         return res.json();
       })
       .then((info) => {
-        resultadosTotales = info.data.total 
+        resultadosTotales = info.data.total;
         mostrarComics(info);
       });
   } else if (tipo == "characters") {
@@ -108,15 +113,13 @@ const filtradoInputLleno = (tipo, orden, texto) => {
         return res.json();
       })
       .then((info) => {
-        resultadosTotales = info.data.total 
+        resultadosTotales = info.data.total;
         mostrarPersonajes(info);
       });
   }
 };
 
-
 ////////////////////////  PAGINADO  //////////////////////////
-
 
 botonPrimeraPagina.onclick = () => {
   paginaActual = 0;
@@ -147,13 +150,12 @@ botonProximaPagina.onclick = () => {
 };
 
 botonUltimaPagina.onclick = () => {
-  cantidadDePaginas = resultadosTotales/resultadosPorPagina
-  let resto = resultadosTotales%resultadosPorPagina
+  cantidadDePaginas = resultadosTotales / resultadosPorPagina;
+  let resto = resultadosTotales % resultadosPorPagina;
   if (resto > 0) {
-    paginaActual = Math.floor(cantidadDePaginas)
-  }
-  else {
-    paginaActual = (resultadosTotales - resto) / resultadosPorPagina
+    paginaActual = Math.floor(cantidadDePaginas);
+  } else {
+    paginaActual = (resultadosTotales - resto) / resultadosPorPagina;
   }
   if (input.value === "") {
     filtradoInputVacio(tipo.value, orden.value);
@@ -161,8 +163,6 @@ botonUltimaPagina.onclick = () => {
     filtradoInputLleno(tipo.value, orden.value, input.value);
   }
 };
-
-
 
 ///////////////// EJECUCION DE COMBINACIONES DE FILTROS DE BUSQUEDA  /////////////////
 
@@ -276,7 +276,7 @@ mostrarPersonajes = (info) => {
   resultados.innerHTML = "";
 
   personajes.map((info) => {
-    resultados.innerHTML += `<article class="card" data-id=${info.id}><div class="imagen"><img src="${info.thumbnail.path}/portrait_incredible.${info.thumbnail.extension}" alt=""></div>
+    resultados.innerHTML += `<article class="tarjeta-personaje" data-id=${info.id}><div class="imagen"><img src="${info.thumbnail.path}/portrait_incredible.${info.thumbnail.extension}" alt=""></div>
     <div class="info"> <div class="nombre"><h2>${info.name}</h2></div></div></article>`;
   });
 

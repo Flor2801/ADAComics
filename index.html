@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="path/to/bootstrap/css/bootstrap.min.css" />
 
     <link
@@ -28,25 +28,35 @@
 
       <div class="contenedor-filtros">
         <div class="search-texto">
-          <i class="fas fa-search"></i><input type="text" placeholder="Ingresa tu búsqueda" id="busqueda-por-texto"/>
+          <i class="fas fa-search"></i>
+          <input
+            type="text"
+            placeholder="Ingresa tu búsqueda"
+            id="busqueda-por-texto"
+          />
         </div>
 
         <div class="filtros">
-          <p>Tipo</p>
-          <form name=f1>
-          <select id="tipo-elegido" name="tipo" onchange="cambiaOpcion()">
-            <option value="comics">CÓMICS</option>
-            <option value="characters">PERSONAJES</option>
-          </select>
-          <p>Orden</p>
-          <select id="orden-elegido" name="variable">
-            <option value="title" name="titulo">A-Z</option>
-            <option value="-title" name="-titulo">Z-A</option>
-            <option value="-focDate" name="nuevos">Mas nuevos</option>
-            <option value="focDate" name="viejos">Mas viejos</option>
-          </select>
-        </form>
+    
+         <div>
+          <form name="f1">
+            <p>TIPO</p> 
+            <select id="tipo-elegido" name="tipo" onchange="cambiaOpcion()">
+              <option value="comics">CÓMICS</option>
+              <option value="characters">PERSONAJES</option>
+            </select>
+            <p>ORDEN</p>
+            <select id="orden-elegido" name="variable">
+              <option value="title" name="titulo">A-Z</option>
+              <option value="-title" name="-titulo">Z-A</option>
+              <option value="-focDate" name="nuevos">Mas nuevos</option>
+              <option value="focDate" name="viejos">Mas viejos</option>
+            </select>
+          </form>
+        </div>
+        <div>
           <button id="buscar">BUSCAR</button>
+        </div>
         </div>
       </div>
     </section>
@@ -57,10 +67,8 @@
       <div><span id="filtrado">0</span><span>RESULTADOS</span></div>
     </div>
     <section>
-      <div class="contenedor-resultados" id="resultados">
-     
-      </div>
-    </section> 
+      <div class="contenedor-resultados" id="resultados"></div>
+    </section>
 
     <!-- PAGINADOR -->
     <div class="paginador">
@@ -68,16 +76,14 @@
       <button id="previous"><i class="fas fa-angle-left"></i></button>
       <button id="next"><i class="fas fa-angle-right"></i></button>
       <button id="last"><i class="fas fa-angle-double-right"></i></button>
-      <a href="" id="proximo">PROXIMA</a>
     </div>
- 
+
     <!-- FOOTER -->
     <footer>
       <div class="footer">
         <div><p>Hecho con ❤️ por ADA</p></div>
       </div>
     </footer>
-<script src="script.js"></script>
-
+    <script src="script.js"></script>
   </body>
 </html>

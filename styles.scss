@@ -11,10 +11,16 @@
   margin-right: 100px;
 }
 
+%font {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
 body {
   margin: 0px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  box-sizing: border-box;
 }
 
 h1 {
@@ -24,7 +30,7 @@ h1 {
 
 .titulo {
   background-color: black;
-  width: 100vw;
+  width: auto;
   height: 50px;
   @extend %flex-centrado;
 
@@ -44,10 +50,12 @@ h1 {
 }
 
 .fondo {
-  width: 100vw;
+  width: auto;
   height: 400px;
   background-color: yellow;
   overflow: hidden;
+  margin: 0px;
+
   img {
     width: 100%;
     position: relative;
@@ -62,30 +70,74 @@ h1 {
 
   .contenedor-filtros {
     display: flex;
-    direction: wrap;
     position: absolute;
+    justify-content: space-evenly;
+    flex-grow: 1;
+
     .filtros {
       display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-left: 100px;
+      font-weight: 600;
+
+      form {
+        display: flex;
+
+
+        p {
+          color: rgb(73, 73, 73);
+          margin: 15px;
+        }
+
+        select {
+          margin: 10px;
+          border-style: none;
+          @extend %font;
+          font-size: 15px;
+          font-weight: 600;
+          width: 120px;
+        }
+      }
+
+      #buscar {
+        border-style: none;
+        background-color: black;
+        color: white;
+        font-weight: 600;
+        font-size: 15px;
+        margin-left: 10px;
+        width: 100px;
+        height: 50px;
+        @extend %font;
+      }
     }
 
     .search-texto {
+      position: relative;
+      border-bottom: solid black 2px;
+
       .fas {
         color: black;
         font-size: 20px;
-        position: relative;
-        left: 30px;
+        position: absolute;
+        top: 15px;
       }
+
       ::placeholder {
         color: rgb(126, 126, 126);
         font-size: 20px;
-        margin-left: 50px;
+        text-align: left;
+        padding-inline-start: 10px;
+        @extend %font;
       }
-
       #busqueda-por-texto {
-        width: 600px;
-        height: 50px;
+        margin-left: 30px;
+        width: 500px;
+        height: 30px;
         border: none;
-        border-bottom: solid black 2px;
+     
+        margin-top: 10px;
       }
     }
   }
@@ -95,9 +147,10 @@ h1 {
   @extend %margin;
   margin-bottom: 30px;
   margin-top: 100px;
+  @extend %font;
 
   span {
-    font-size: 13px;
+    font-size: 15px;
     color: gray;
     font-weight: bold;
     margin-right: 20px;
@@ -158,17 +211,16 @@ h1 {
     display: flex;
     margin: 10px 0px 30px 0px;
 
-  #info-detalle-primaria-data {
-    max-width: 600px;
-    margin-left: 20px;
+    #info-detalle-primaria-data {
+      max-width: 600px;
+      margin-left: 20px;
 
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
         Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 
-    p {
-    font-size: 15px;
-    }
-    
+      p {
+        font-size: 15px;
+      }
     }
   }
 
@@ -178,11 +230,11 @@ h1 {
     flex-wrap: wrap;
     max-width: 900px;
 
-  #info-tarjeta-personaje {
-    margin: 10px;
-    background-color: red;
-    #info-tarjeta-personaje-name {
-    background-color: yellow;
+    #info-tarjeta-personaje {
+      margin: 10px;
+      background-color: red;
+      #info-tarjeta-personaje-name {
+        background-color: yellow;
       }
     }
   }
@@ -209,7 +261,7 @@ h1 {
 
 footer {
   background-color: rgb(0, 0, 0);
-  width: 100vw;
+  width: auto;
   height: 80px;
   @extend %flex-centrado;
 
