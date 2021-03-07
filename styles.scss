@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Bangers&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
 
 %flex-centrado {
   display: flex;
@@ -12,20 +13,18 @@
 }
 
 %font {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 body {
   margin: 0px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  box-sizing: border-box;
+  @extend %font
 }
 
 h1 {
   font-size: 23px;
   font-weight: bold;
+  @extend %font
 }
 
 .titulo {
@@ -67,6 +66,7 @@ h1 {
   padding-top: 20px;
   padding-bottom: 20px;
   @extend %margin;
+  @extend %font;
 
   .contenedor-filtros {
     display: flex;
@@ -83,7 +83,6 @@ h1 {
 
       form {
         display: flex;
-
 
         p {
           color: rgb(73, 73, 73);
@@ -136,8 +135,10 @@ h1 {
         width: 500px;
         height: 30px;
         border: none;
-     
         margin-top: 10px;
+        &:focus {
+          outline: none;
+        }
       }
     }
   }
@@ -150,7 +151,7 @@ h1 {
   @extend %font;
 
   span {
-    font-size: 15px;
+    font-size: 12px;
     color: gray;
     font-weight: bold;
     margin-right: 20px;
@@ -162,6 +163,8 @@ h1 {
   background-color: white;
   display: flex;
   flex-wrap: wrap;
+  justify-content: flex-start;
+  flex-grow: 1;
   margin-bottom: 20px;
 
   .card {
@@ -169,73 +172,128 @@ h1 {
     height: 380px;
     background-color: white;
     color: black;
-    margin: 10px;
+    margin: 12px;
+    cursor: pointer;
 
-    &:hover {
-      .imagen {
-        img {
-          transform: translate(0, 20);
-        }
+    .info {
+      .nombre {
+        @extend %font;
+        font-size: 20px;
+        color: rgb(73, 73, 73);
+        font-size: 13px;
+        font-weight: 600;
       }
-    }
-
-    h2 {
-      font-size: 12px;
-    }
-
-    p {
-      font-size: 10px;
     }
 
     .imagen {
       height: 300px;
       overflow: hidden;
+      box-shadow: 0px 15px 20px -10px gray;
+      margin-bottom: 20px;
+      &:hover {
+        transform: translateY(-20px);
+        transition: 0.3s;
+      }
 
       img {
-        height: 100%;
+        width: 100%;
       }
     }
   }
+}
 
-  .superheroe {
-    width: 200px;
-    height: 380px;
-    background-color: red;
+.card-tarjeta-personaje {
+  width: 170px;
+  height: 380px;
+  background-color: red;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+
+  &:hover {
+    .imagen {
+      img {
+        transform: scale(1.1);
+        transition: 0.2s;
+        overflow: hidden;
+      }
+    }
+    .info {
+      color: black;
+      background-color: red;
+      transition: 0.2s;
+    }
+  }
+
+  .imagen {
+    height: 66%;
+    overflow: hidden;
+    img {
+      width: 100%;
+    }
+  }
+
+  .info {
+    height: 33%;
+    background-color: black;
+    color: white;
+    @extend %font;
+    font-size: 10px;
+
+    .nombre {
+      margin-left: 15px;
+    }
   }
 }
 
 .contenedor-detalle {
   display: flex;
   flex-direction: column;
+
   #info-detalle-primaria {
     display: flex;
-    margin: 10px 0px 30px 0px;
+    margin: 10px 0px 40px 0px;
+
+    #info-detalle-primaria-imagen {
+      width: 350px;
+      img {
+        width: 100%;
+      }
+    }
 
     #info-detalle-primaria-data {
+      margin: 0 0 0 50px;
       max-width: 600px;
-      margin-left: 20px;
-
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      @extend %font;
 
       p {
         font-size: 15px;
+      }
+      h2 {
+        margin-top: 0px;
       }
     }
   }
 
   #info-detalle-secundaria {
-    background-color: blue;
     display: flex;
     flex-wrap: wrap;
-    max-width: 900px;
+    margin-bottom: 100px;
+
+    #info-detalle-secundaria-resultados {
+      span {
+        display: block;
+        font-size: 12px;
+        color: gray;
+        font-weight: bold;
+        margin-right: 20px;
+      }
+    }
 
     #info-tarjeta-personaje {
       margin: 10px;
-      background-color: red;
-      #info-tarjeta-personaje-name {
-        background-color: yellow;
-      }
     }
   }
 }
@@ -266,8 +324,7 @@ footer {
   @extend %flex-centrado;
 
   p {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    @extend %font;
     font-weight: 600;
     color: white;
   }
