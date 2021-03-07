@@ -1,3 +1,21 @@
+// boton primera pagina: pagina 1, offset 0 (pagina = total / 20) (offset numeros de pagina * 20)
+// boton anterior pagina: suma 1 pagina, multiplica pags por 20 (offset)
+// boton proxima pagina: suma 1 pagina, multiplica pags por 20 (offset)
+// boton ultima pagina: al total de resultados, le resta 20, hace offset con ese valor
+let resultadosTotales = 0;
+let paginaActual = 0;
+let resultadosPorPagina = 20;
+let cantidadDePaginas = 0;
+const botonPrimeraPagina = document.getElementById("first");
+const botonPaginaAnterior = document.getElementById("previous");
+const botonProximaPagina = document.getElementById("next");
+const botonUltimaPagina = document.getElementById("last");
+
+// DATOS DE LA URL DEL FETCH DE MARVEL
+const urlBase = "https://gateway.marvel.com/v1/public/";
+const apiKey = "cdf503fce8f2c519f899f64cff25fd79";
+const botonBuscar = document.getElementById("buscar");
+
 // FECTH INCIAL PARA CARGAR LA PAGINA (muestra cómics)
 fetch(
   "https://gateway.marvel.com:443/v1/public/comics?apikey=cdf503fce8f2c519f899f64cff25fd79&orderBy=title&offset=0"
@@ -45,24 +63,6 @@ const cambiaOpcion = () => {
     orden.innerHTML += `<option value="-name">Z-A</option>`;
   }
 };
-
-// boton primera pagina: pagina 1, offset 0 (pagina = total / 20) (offset numeros de pagina * 20)
-// boton anterior pagina: suma 1 pagina, multiplica pags por 20 (offset)
-// boton proxima pagina: suma 1 pagina, multiplica pags por 20 (offset)
-// boton ultima pagina: al total de resultados, le resta 20, hace offset con ese valor
-let resultadosTotales = 0;
-let paginaActual = 0;
-let resultadosPorPagina = 20;
-let cantidadDePaginas = 0;
-const botonPrimeraPagina = document.getElementById("first");
-const botonPaginaAnterior = document.getElementById("previous");
-const botonProximaPagina = document.getElementById("next");
-const botonUltimaPagina = document.getElementById("last");
-
-// DATOS DE LA URL DEL FETCH DE MARVEL
-const urlBase = "https://gateway.marvel.com/v1/public/";
-const apiKey = "cdf503fce8f2c519f899f64cff25fd79";
-const botonBuscar = document.getElementById("buscar");
 
 // SI EL INPUT DE TEXTO ESTA VACIO buscara por TIPO Y ORDEN
 const filtradoInputVacio = (tipo, orden) => {
@@ -128,7 +128,6 @@ botonPrimeraPagina.onclick = () => {
   } else if (input.value !== "") {
     filtradoInputLleno(tipo.value, orden.value, input.value);
   }
-  // botonPrimeraPagina.disabled = true;
 };
 
 botonPaginaAnterior.onclick = () => {
@@ -184,7 +183,7 @@ mostrarComics = (info) => {
   let comic = info.data.results;
   const resultados = document.getElementById("resultados");
   const totalComics = document.getElementById("filtrado");
-  console.log(info);
+
   totalResultados.classList.remove("oculto");
 
   totalComics.innerHTML = `${info.data.total}`;
@@ -325,9 +324,7 @@ mostrarPersonajes = (info) => {
             .then((info) => {
               console.log(info);
               let participacionPersonaje = info.data.results;
-              let cantidadComics = document.getElementById(
-                "cantidad-comics"
-              );
+              let cantidadComics = document.getElementById("cantidad-comics");
 
               let resultadosComics = document.getElementById(
                 "info-detalle-secundaria-comics"
@@ -344,3 +341,4 @@ mostrarPersonajes = (info) => {
     };
   });
 };
+
