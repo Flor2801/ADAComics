@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Bangers&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
 
 %flex-centrado {
   display: flex;
@@ -12,20 +13,18 @@
 }
 
 %font {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 body {
   margin: 0px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  box-sizing: border-box;
+  @extend %font
 }
 
 h1 {
   font-size: 23px;
   font-weight: bold;
+  @extend %font
 }
 
 .titulo {
@@ -67,6 +66,7 @@ h1 {
   padding-top: 20px;
   padding-bottom: 20px;
   @extend %margin;
+  @extend %font
 
   .contenedor-filtros {
     display: flex;
@@ -151,7 +151,7 @@ h1 {
   @extend %font;
 
   span {
-    font-size: 15px;
+    font-size: 12px;
     color: gray;
     font-weight: bold;
     margin-right: 20px;
@@ -215,18 +215,16 @@ h1 {
   &:hover {
     .imagen {
       img {
-        transform: scale(1.10);
+        transform: scale(1.1);
         transition: 0.2s;
         overflow: hidden;
       }
-    
     }
     .info {
       color: black;
       background-color: red;
       transition: 0.2s;
     }
-    
   }
 
   .imagen {
@@ -253,23 +251,22 @@ h1 {
 .contenedor-detalle {
   display: flex;
   flex-direction: column;
+
   #info-detalle-primaria {
     display: flex;
-    margin: 10px 0px 60px 0px;
+    margin: 10px 0px 40px 0px;
 
     #info-detalle-primaria-imagen {
       width: 350px;
-     img {
-       width: 100%;
-     }
+      img {
+        width: 100%;
+      }
     }
 
-   
     #info-detalle-primaria-data {
       margin: 0 0 0 50px;
       max-width: 600px;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      @extend %font
 
       p {
         font-size: 15px;
@@ -286,8 +283,9 @@ h1 {
     margin-bottom: 100px;
 
     #info-detalle-secundaria-resultados {
-      p {
-        font-size: 15px;
+      span {
+        display: block;
+        font-size: 12px;
         color: gray;
         font-weight: bold;
         margin-right: 20px;
@@ -296,7 +294,6 @@ h1 {
 
     #info-tarjeta-personaje {
       margin: 10px;
- 
     }
   }
 }
@@ -327,8 +324,7 @@ footer {
   @extend %flex-centrado;
 
   p {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    @extend %font
     font-weight: 600;
     color: white;
   }

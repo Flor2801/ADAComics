@@ -167,6 +167,7 @@ botonUltimaPagina.onclick = () => {
 ///////////////// EJECUCION DE COMBINACIONES DE FILTROS DE BUSQUEDA  /////////////////
 
 botonBuscar.onclick = () => {
+  paginaActual = 0
   ///////////// INPUT VACIO buscara por TIPO Y ORDEN
   ///////////// INPUT LLENO buscara por TIPO, ORDEN Y TEXTO
   if (input.value === "") {
@@ -177,6 +178,8 @@ botonBuscar.onclick = () => {
 };
 
 ///////////////// FUNCION PARA CREAR LAS TARJETAS CUANDO LA OPCION ELEGIDA SON COMICS /////////////////
+let totalResultados = document.getElementById("total-resultado");
+
 
 mostrarComics = (info) => {
   let comic = info.data.results;
@@ -195,12 +198,15 @@ mostrarComics = (info) => {
 
   const tarjeta = document.querySelectorAll(".card");
 
-  /// SELECCIONAR TARJETA PARA VER DETALLE ///
+  /// VER DETALLE DE COMICS ///
 
   tarjeta.forEach((tarjeta) => {
     tarjeta.onclick = () => {
       resultados.innerHTML = "";
       totalComics.innerHTML = "";
+      totalResultados.classList.add("oculto")
+      console.log(totalResultados)
+      
 
       fetch(
         `https://gateway.marvel.com/v1/public/comics/${tarjeta.dataset.id}?apikey=${apiKey}`
@@ -223,8 +229,10 @@ mostrarComics = (info) => {
             <h3>DESCRIPCIÓN:</h3><p>${comicSeleccionado.description}</p></div>
            </div> 
         
-           <div id="info-detalle-secundaria-resultados"><h2>Personajes</h2>
-           <p><span id="filtrado">0</span><span>RESULTADOS</span></p></div>
+           <div id="info-detalle-secundaria-resultados">
+           <h2>Personajes</h2>
+           <span id="cantidadPersonajes">0</span><span>RESULTADOS</span>
+           </div>
 
            <div id="info-detalle-secundaria">
           </div>
@@ -240,16 +248,17 @@ mostrarComics = (info) => {
               return res.json();
             })
             .then((info) => {
-              console.log(info);
               let personaje = info.data.results;
-              let resultadosPersonajes = document.getElementById(
-                "info-detalle-secundaria"
-              );
+              let resultadosPersonajes = document.getElementById("info-detalle-secundaria");
+              let cantidadPersonajes = document.getElementById("cantidadPersonajes");
+              cantidadPersonajes.innerHTML = `${info.data.total}`
 
               personaje.map((tarjetas) => {
                 return (resultadosPersonajes.innerHTML += `<div class="card-tarjeta-personaje" data-id=${tarjeta.id}><div class="imagen"><img src="${tarjetas.thumbnail.path}/portrait_incredible.${tarjetas.thumbnail.extension}" alt=""></div>
               <div class="info"> <div class="nombre"><h2>${tarjetas.name}</h2></div></div></div>`);
               });
+
+              
 
               // const tarjetas = document.querySelectorAll(
               //   "#info-tarjeta-personaje"
@@ -274,6 +283,7 @@ mostrarPersonajes = (info) => {
   let personajes = info.data.results;
   const resultados = document.getElementById("resultados");
   const totalComics = document.getElementById("filtrado");
+  
 
   totalComics.innerHTML = `${info.data.total}`;
   resultados.innerHTML = "";
@@ -283,7 +293,7 @@ mostrarPersonajes = (info) => {
     <div class="info"> <div class="nombre"><h2>${info.name}</h2></div></div></article>`;
   });
 
-  /// SELECCIONAR PERSONAJE PARA VER DETALLE ///
+  /// VER DETALLE DE PERSONAJE ///
 
   const personaje = document.querySelectorAll("article");
 
@@ -291,6 +301,8 @@ mostrarPersonajes = (info) => {
     personaje.onclick = () => {
       resultados.innerHTML = "";
       totalComics.innerHTML = 0;
+      totalResultados.classList.add("oculto")
+      console.log(totalResultados)
 
       fetch(
         `https://gateway.marvel.com/v1/public/characters/${personaje.dataset.id}?apikey=${apiKey}`
@@ -311,7 +323,6 @@ mostrarPersonajes = (info) => {
             <h2>${personajeSeleccionado[0].name}</h2>
             <p>${personajeSeleccionado[0].description}</p></div>
            </div> 
-        
            <div id="info-detalle-secundaria-resultados"><h2>Comics</h2>
            <p><span id="filtrado">0</span><span>RESULTADOS</span></p></div>
 
@@ -320,11 +331,7 @@ mostrarPersonajes = (info) => {
            </div>
 
            </div>
-          `
-         
-
-    
-    ;
+          `;
         });
 
       fetch(
@@ -336,7 +343,7 @@ mostrarPersonajes = (info) => {
         .then((info) => {
           console.log(info);
           let participacionPersonaje = info.data.results;
-          console.log(participacionPersonaje);
+          let cantidadComics = document.getElementById("filtrado")
 
           let resultadosComics = document.getElementById(
             "info-detalle-secundaria"
