@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="path/to/bootstrap/css/bootstrap.min.css" />
+    <link rel="icon" href="favicon-32x32.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+    />
+    <title>ADAComics</title>
+  </head>
+
+  <body>
+    <!-- HOME PRINCIPAL -->
+    <section class="home">
+      <div class="titulo">
+        <div><p>ADA Comics</p></div>
+      </div>
+      <div class="fondo"><img src="hero.jpg" /></div>
+    </section>
+
+    <!-- FITROS -->
+    <section class="caja-filtros">
+      <div><h1>Búsqueda</h1></div>
+
+      <div class="contenedor-filtros">
+        <div class="search-texto">
+          <i class="fas fa-search"></i>
+          <input
+            type="text"
+            placeholder="Ingresa tu búsqueda"
+            id="busqueda-por-texto"
+          />
+        </div>
+
+        <div class="filtros">
+          <div>
+            <form name="f1">
+              <p>TIPO</p>
+              <select id="tipo-elegido" name="tipo" onchange="cambiaOpcion()">
+                <option value="comics">CÓMICS</option>
+                <option value="characters">PERSONAJES</option>
+              </select>
+              <p>ORDEN</p>
+              <select id="orden-elegido" name="variable">
+                <option value="title" name="titulo">A-Z</option>
+                <option value="-title" name="-titulo">Z-A</option>
+                <option value="-focDate" name="nuevos">Mas nuevos</option>
+                <option value="focDate" name="viejos">Mas viejos</option>
+              </select>
+            </form>
+          </div>
+          <div>
+            <button id="buscar">BUSCAR</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESULTADOS -->
+    <div class="total-resultado">
+      <div class="" id="total-resultado">
+        <div><h1>Resultados</h1></div>
+        <div><span id="filtrado">0</span><span>RESULTADOS</span></div>
+      </div>
+    </div>
+    <section>
+      <div class="contenedor-resultados" id="resultados"></div>
+    </section>
+
+    <!-- PAGINADOR -->
+    <div class="paginador">
+      <button id="first"><i class="fas fa-angle-double-left"></i></button>
+      <button id="previous"><i class="fas fa-angle-left"></i></button>
+      <button id="next"><i class="fas fa-angle-right"></i></button>
+      <button id="last"><i class="fas fa-angle-double-right"></i></button>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer">
+        <div><p>Hecho con ❤️ por ADA</p></div>
+      </div>
+    </footer>
+    <script src="script.js"></script>
+  </body>
+</html>
