@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Bangers&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");
 footer, .paginador, .titulo {
   display: flex;
   justify-content: center;
@@ -10,17 +11,14 @@ footer, .paginador, .titulo {
   margin-right: 100px;
 }
 
-.card-tarjeta-personaje .info, .contenedor-resultados .card .info .nombre, .total-resultado, .caja-filtros .contenedor-filtros .search-texto ::placeholder, .caja-filtros .contenedor-filtros .filtros #buscar, .caja-filtros .contenedor-filtros .filtros form select {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+.contenedor-detalle #info-detalle-primaria #info-detalle-primaria-data, .contenedor-resultados .card .info .nombre, .contenedor-resultados .card, .caja-filtros .contenedor-filtros .filtros #buscar, .caja-filtros .contenedor-filtros .filtros form select, .caja-filtros .contenedor-filtros .filtros, body {
+  font-family: "Roboto", sans-serif;
 }
 
 body {
   margin: 0px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  box-sizing: border-box;
 }
-
-h1 {
+body h1 {
   font-size: 23px;
   font-weight: bold;
 }
@@ -46,7 +44,6 @@ h1 {
 .fondo {
   width: auto;
   height: 400px;
-  background-color: yellow;
   overflow: hidden;
   margin: 0px;
 }
@@ -65,37 +62,6 @@ h1 {
   position: absolute;
   justify-content: space-evenly;
   flex-grow: 1;
-}
-.caja-filtros .contenedor-filtros .filtros {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-left: 100px;
-  font-weight: 600;
-}
-.caja-filtros .contenedor-filtros .filtros form {
-  display: flex;
-}
-.caja-filtros .contenedor-filtros .filtros form p {
-  color: #494949;
-  margin: 15px;
-}
-.caja-filtros .contenedor-filtros .filtros form select {
-  margin: 10px;
-  border-style: none;
-  font-size: 15px;
-  font-weight: 600;
-  width: 120px;
-}
-.caja-filtros .contenedor-filtros .filtros #buscar {
-  border-style: none;
-  background-color: black;
-  color: white;
-  font-weight: 600;
-  font-size: 15px;
-  margin-left: 10px;
-  width: 100px;
-  height: 50px;
 }
 .caja-filtros .contenedor-filtros .search-texto {
   position: relative;
@@ -123,6 +89,39 @@ h1 {
 .caja-filtros .contenedor-filtros .search-texto #busqueda-por-texto:focus {
   outline: none;
 }
+.caja-filtros .contenedor-filtros .filtros {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 100px;
+  font-weight: 600;
+}
+.caja-filtros .contenedor-filtros .filtros form {
+  display: flex;
+  justify-content: space-around;
+}
+.caja-filtros .contenedor-filtros .filtros form p {
+  color: #6d6d6d;
+  margin-left: 15px;
+  font-size: 13px;
+}
+.caja-filtros .contenedor-filtros .filtros form select {
+  margin: 10px;
+  border-style: none;
+  font-size: 13px;
+  font-weight: 600;
+  width: 120px;
+}
+.caja-filtros .contenedor-filtros .filtros #buscar {
+  border-style: none;
+  background-color: black;
+  color: white;
+  font-weight: 600;
+  font-size: 15px;
+  margin-left: 10px;
+  width: 100px;
+  height: 50px;
+}
 
 .total-resultado {
   margin-bottom: 30px;
@@ -146,16 +145,22 @@ h1 {
 .contenedor-resultados .card {
   width: 200px;
   height: 380px;
-  background-color: white;
   color: black;
   margin: 12px;
   cursor: pointer;
 }
+.contenedor-resultados .card:hover .imagen {
+  transform: translateY(-20px);
+  transition: 0.3s;
+}
 .contenedor-resultados .card .info .nombre {
-  font-size: 20px;
-  color: #494949;
+  font-size: 50px;
+  color: #272727;
   font-size: 13px;
   font-weight: 600;
+}
+.contenedor-resultados .card h2 {
+  font-size: 12px;
 }
 .contenedor-resultados .card .imagen {
   height: 300px;
@@ -163,12 +168,56 @@ h1 {
   box-shadow: 0px 15px 20px -10px gray;
   margin-bottom: 20px;
 }
-.contenedor-resultados .card .imagen:hover {
-  transform: translateY(-20px);
-  transition: 0.3s;
-}
 .contenedor-resultados .card .imagen img {
   width: 100%;
+}
+.contenedor-resultados .superheroe {
+  width: 200px;
+  height: 380px;
+  background-color: red;
+}
+
+.contenedor-detalle {
+  display: flex;
+  flex-direction: column;
+}
+.contenedor-detalle #info-detalle-primaria {
+  display: flex;
+  margin: 10px 0px 60px 0px;
+}
+.contenedor-detalle #info-detalle-primaria #info-detalle-primaria-imagen {
+  width: 350px;
+}
+.contenedor-detalle #info-detalle-primaria #info-detalle-primaria-imagen img {
+  width: 100%;
+}
+.contenedor-detalle #info-detalle-primaria #info-detalle-primaria-data {
+  margin: 0 0 0 50px;
+  max-width: 600px;
+}
+.contenedor-detalle #info-detalle-primaria #info-detalle-primaria-data p {
+  font-size: 15px;
+}
+.contenedor-detalle #info-detalle-primaria #info-detalle-primaria-data h2 {
+  margin-top: 0px;
+}
+.contenedor-detalle #info-detalle-secundaria {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 100px;
+}
+.contenedor-detalle #info-detalle-secundaria p {
+  font-size: 15px;
+  color: gray;
+  font-weight: bold;
+  margin-right: 20px;
+}
+.contenedor-detalle #info-detalle-secundaria #info-tarjeta-personaje {
+  margin: 10px;
+}
+.contenedor-detalle #info-detalle-secundaria-comics {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .card-tarjeta-personaje {
@@ -208,50 +257,11 @@ h1 {
   margin-left: 15px;
 }
 
-.contenedor-detalle {
-  display: flex;
-  flex-direction: column;
-}
-.contenedor-detalle #info-detalle-primaria {
-  display: flex;
-  margin: 10px 0px 60px 0px;
-}
-.contenedor-detalle #info-detalle-primaria #info-detalle-primaria-imagen {
-  width: 350px;
-}
-.contenedor-detalle #info-detalle-primaria #info-detalle-primaria-imagen img {
-  width: 100%;
-}
-.contenedor-detalle #info-detalle-primaria #info-detalle-primaria-data {
-  margin: 0 0 0 50px;
-  max-width: 600px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-}
-.contenedor-detalle #info-detalle-primaria #info-detalle-primaria-data p {
-  font-size: 15px;
-}
-.contenedor-detalle #info-detalle-primaria #info-detalle-primaria-data h2 {
-  margin-top: 0px;
-}
-.contenedor-detalle #info-detalle-secundaria {
-  display: flex;
-  flex-wrap: wrap;
-  margin-bottom: 100px;
-}
-.contenedor-detalle #info-detalle-secundaria #info-detalle-secundaria-resultados p {
-  font-size: 15px;
-  color: gray;
-  font-weight: bold;
-  margin-right: 20px;
-}
-.contenedor-detalle #info-detalle-secundaria #info-tarjeta-personaje {
-  margin: 10px;
-}
-
 .paginador {
   height: 50px;
   margin-top: 10px;
   padding-bottom: 100px;
+  height: 50px;
 }
 .paginador button {
   width: 40px;
