@@ -103,12 +103,12 @@ body h1 {
 .caja-filtros .contenedor-filtros .filtros form p {
   color: #6d6d6d;
   margin-left: 15px;
-  font-size: 13px;
+  font-size: 14px;
 }
 .caja-filtros .contenedor-filtros .filtros form select {
   margin: 10px;
   border-style: none;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
   width: 120px;
 }
@@ -118,20 +118,26 @@ body h1 {
   color: white;
   font-weight: 600;
   font-size: 15px;
-  margin-left: 10px;
+  margin-left: 15px;
   width: 100px;
-  height: 50px;
+  height: 40px;
+}
+.caja-filtros .contenedor-filtros .filtros #buscar:hover {
+  color: white;
+  background-color: red;
+  outline: none;
+  cursor: pointer;
 }
 
 .total-resultado {
-  margin-bottom: 30px;
+  margin-bottom: 50px;
   margin-top: 100px;
 }
 .total-resultado span {
-  font-size: 15px;
+  font-size: 14px;
   color: gray;
   font-weight: bold;
-  margin-right: 20px;
+  margin-right: 15px;
 }
 
 .contenedor-resultados {
@@ -144,9 +150,10 @@ body h1 {
 }
 .contenedor-resultados .card {
   width: 200px;
-  height: 380px;
+  height: auto;
   color: black;
-  margin: 12px;
+  margin-right: 20px;
+  margin-bottom: 50px;
   cursor: pointer;
 }
 .contenedor-resultados .card:hover .imagen {
@@ -204,27 +211,33 @@ body h1 {
 .contenedor-detalle #info-detalle-secundaria {
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: 100px;
+  margin-bottom: 150px;
+  justify-content: flex-start;
 }
-.contenedor-detalle #info-detalle-secundaria p {
-  font-size: 15px;
-  color: gray;
-  font-weight: bold;
-  margin-right: 20px;
-}
-.contenedor-detalle #info-detalle-secundaria #info-tarjeta-personaje {
+.contenedor-detalle #info-tarjeta-personaje {
   margin: 10px;
 }
-.contenedor-detalle #info-detalle-secundaria-comics {
+
+#info-detalle-secundaria-comics {
   display: flex;
   flex-wrap: wrap;
+}
+
+#info-detalle-secundaria-resultados {
+  margin-bottom: 30px;
+}
+#info-detalle-secundaria-resultados span {
+  font-size: 14px;
+  color: gray;
+  font-weight: bold;
+  margin-right: 10px;
 }
 
 .card-tarjeta-personaje {
   width: 170px;
   height: 380px;
   background-color: red;
-  margin: 10px;
+  margin-right: 18px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

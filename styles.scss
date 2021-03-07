@@ -73,7 +73,6 @@ body {
     .search-texto {
       position: relative;
       border-bottom: solid black 2px;
-     
 
       .fas {
         color: black;
@@ -117,13 +116,13 @@ body {
         p {
           color: #6d6d6d;
           margin-left: 15px;
-          font-size: 13px;
+          font-size: 14px;
         }
 
         select {
           margin: 10px;
           border-style: none;
-          font-size: 13px;
+          font-size: 14px;
           font-weight: 600;
           width: 120px;
           @extend %font;
@@ -136,25 +135,32 @@ body {
         color: white;
         font-weight: 600;
         font-size: 15px;
-        margin-left: 10px;
+        margin-left: 15px;
         width: 100px;
-        height: 50px;
+        height: 40px;
         @extend %font;
+
+        &:hover {
+          color: white;
+          background-color: red;
+          outline: none;
+          cursor: pointer;
+        }
       }
     }
   }
 }
 
 .total-resultado {
-  margin-bottom: 30px;
+  margin-bottom: 50px;
   margin-top: 100px;
   @extend %margin;
 
   span {
-    font-size: 15px;
+    font-size: 14px;
     color: gray;
     font-weight: bold;
-    margin-right: 20px;
+    margin-right: 15px;
   }
 }
 
@@ -169,9 +175,10 @@ body {
 
   .card {
     width: 200px;
-    height: 380px;
+    height: auto;
     color: black;
-    margin: 12px;
+    margin-right: 20px;
+    margin-bottom: 50px;
     cursor: pointer;
     @extend %font;
 
@@ -252,33 +259,36 @@ body {
   #info-detalle-secundaria {
     display: flex;
     flex-wrap: wrap;
-    margin-bottom: 100px;
-
-    p {
-      font-size: 15px;
-      color: gray;
-      font-weight: bold;
-      margin-right: 20px;
-    }
-
-    #info-tarjeta-personaje {
-      margin: 10px;
-    }
+    margin-bottom: 150px;
+    justify-content: flex-start;
   }
 
-  #info-detalle-secundaria-comics {
-    display: flex;
-    flex-wrap: wrap;
+  #info-tarjeta-personaje {
+    margin: 10px;
+  }
 }
 
+#info-detalle-secundaria-comics {
+  display: flex;
+  flex-wrap: wrap;
+}
 
+#info-detalle-secundaria-resultados {
+  margin-bottom: 30px;
+
+  span {
+    font-size: 14px;
+    color: gray;
+    font-weight: bold;
+    margin-right: 10px;
+  }
 }
 
 .card-tarjeta-personaje {
   width: 170px;
   height: 380px;
   background-color: red;
-  margin: 10px;
+  margin-right: 18px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

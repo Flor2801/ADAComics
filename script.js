@@ -185,6 +185,7 @@ mostrarComics = (info) => {
   const resultados = document.getElementById("resultados");
   const totalComics = document.getElementById("filtrado");
   console.log(info);
+  totalResultados.classList.remove("oculto");
 
   totalComics.innerHTML = `${info.data.total}`;
 
@@ -274,6 +275,7 @@ mostrarPersonajes = (info) => {
 
   totalComics.innerHTML = `${info.data.total}`;
   resultados.innerHTML = "";
+  totalResultados.classList.remove("oculto");
 
   personajes.map((info) => {
     resultados.innerHTML += `<article class="card-tarjeta-personaje" data-id=${info.id}><div class="imagen"><img src="${info.thumbnail.path}/portrait_incredible.${info.thumbnail.extension}" alt=""></div>
