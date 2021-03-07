@@ -1,51 +1,48 @@
 @import url("https://fonts.googleapis.com/css2?family=Bangers&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
-
-%flex-centrado {
+footer, .paginador, .titulo {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-%margin {
+.contenedor-resultados, .total-resultado, .caja-filtros {
   margin-left: 100px;
   margin-right: 100px;
 }
 
-%font {
-  font-family: 'Roboto', sans-serif;
+.total-resultado, .caja-filtros .contenedor-filtros .search-texto ::placeholder, .caja-filtros .contenedor-filtros .filtros #buscar, .caja-filtros .contenedor-filtros .filtros form select {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
 body {
   margin: 0px;
-  @extend %font
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  box-sizing: border-box;
 }
 
 h1 {
   font-size: 23px;
   font-weight: bold;
-  @extend %font
 }
 
 .titulo {
   background-color: black;
   width: auto;
   height: 50px;
-  @extend %flex-centrado;
+}
 
-  div {
-    background-color: red;
-    color: white;
-    font-family: "Bangers", cursive;
-    width: 200px;
-    height: 100%;
-    font-size: 45px;
+.titulo div {
+  background-color: red;
+  color: white;
+  font-family: "Bangers", cursive;
+  width: 200px;
+  height: 100%;
+  font-size: 45px;
+}
 
-    p {
-      margin: 0px;
-      text-align: center;
-    }
-  }
+.titulo div p {
+  margin: 0px;
+  text-align: center;
 }
 
 .fondo {
@@ -54,282 +51,215 @@ h1 {
   background-color: yellow;
   overflow: hidden;
   margin: 0px;
+}
 
-  img {
-    width: 100%;
-    position: relative;
-    top: -150px;
-  }
+.fondo img {
+  width: 100%;
+  position: relative;
+  top: -150px;
 }
 
 .caja-filtros {
   padding-top: 20px;
   padding-bottom: 20px;
-  @extend %margin;
-  @extend %font;
+}
 
-  .contenedor-filtros {
-    display: flex;
-    position: absolute;
-    justify-content: space-evenly;
-    flex-grow: 1;
+.caja-filtros .contenedor-filtros {
+  display: flex;
+  position: absolute;
+  justify-content: space-evenly;
+  flex-grow: 1;
+}
 
-    .filtros {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-left: 100px;
-      font-weight: 600;
+.caja-filtros .contenedor-filtros .filtros {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 100px;
+  font-weight: 600;
+}
 
-      form {
-        display: flex;
+.caja-filtros .contenedor-filtros .filtros form {
+  display: flex;
+}
 
-        p {
-          color: rgb(73, 73, 73);
-          margin: 15px;
-        }
+.caja-filtros .contenedor-filtros .filtros form p {
+  color: #494949;
+  margin: 15px;
+}
 
-        select {
-          margin: 10px;
-          border-style: none;
-          @extend %font;
-          font-size: 15px;
-          font-weight: 600;
-          width: 120px;
-        }
-      }
+.caja-filtros .contenedor-filtros .filtros form select {
+  margin: 10px;
+  border-style: none;
+  font-size: 15px;
+  font-weight: 600;
+  width: 120px;
+}
 
-      #buscar {
-        border-style: none;
-        background-color: black;
-        color: white;
-        font-weight: 600;
-        font-size: 15px;
-        margin-left: 10px;
-        width: 100px;
-        height: 50px;
-        @extend %font;
-      }
-    }
+.caja-filtros .contenedor-filtros .filtros #buscar {
+  border-style: none;
+  background-color: black;
+  color: white;
+  font-weight: 600;
+  font-size: 15px;
+  margin-left: 10px;
+  width: 100px;
+  height: 50px;
+}
 
-    .search-texto {
-      position: relative;
-      border-bottom: solid black 2px;
+.caja-filtros .contenedor-filtros .search-texto {
+  position: relative;
+  border-bottom: solid black 2px;
+}
 
-      .fas {
-        color: black;
-        font-size: 20px;
-        position: absolute;
-        top: 15px;
-      }
+.caja-filtros .contenedor-filtros .search-texto .fas {
+  color: black;
+  font-size: 20px;
+  position: absolute;
+  top: 15px;
+}
 
-      ::placeholder {
-        color: rgb(126, 126, 126);
-        font-size: 20px;
-        text-align: left;
-        padding-inline-start: 10px;
-        @extend %font;
-      }
-      #busqueda-por-texto {
-        margin-left: 30px;
-        width: 500px;
-        height: 30px;
-        border: none;
-        margin-top: 10px;
-        &:focus {
-          outline: none;
-        }
-      }
-    }
-  }
+.caja-filtros .contenedor-filtros .search-texto ::placeholder {
+  color: #7e7e7e;
+  font-size: 20px;
+  text-align: left;
+  padding-inline-start: 10px;
+}
+
+.caja-filtros .contenedor-filtros .search-texto #busqueda-por-texto {
+  margin-left: 30px;
+  width: 500px;
+  height: 30px;
+  border: none;
+  margin-top: 10px;
 }
 
 .total-resultado {
-  @extend %margin;
   margin-bottom: 30px;
   margin-top: 100px;
-  @extend %font;
+}
 
-  span {
-    font-size: 12px;
-    color: gray;
-    font-weight: bold;
-    margin-right: 20px;
-  }
+.total-resultado span {
+  font-size: 15px;
+  color: gray;
+  font-weight: bold;
+  margin-right: 20px;
 }
 
 .contenedor-resultados {
-  @extend %margin;
   background-color: white;
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
-  flex-grow: 1;
   margin-bottom: 20px;
-
-  .card {
-    width: 200px;
-    height: 380px;
-    background-color: white;
-    color: black;
-    margin: 12px;
-    cursor: pointer;
-
-    .info {
-      .nombre {
-        @extend %font;
-        font-size: 20px;
-        color: rgb(73, 73, 73);
-        font-size: 13px;
-        font-weight: 600;
-      }
-    }
-
-    .imagen {
-      height: 300px;
-      overflow: hidden;
-      box-shadow: 0px 15px 20px -10px gray;
-      margin-bottom: 20px;
-      &:hover {
-        transform: translateY(-20px);
-        transition: 0.3s;
-      }
-
-      img {
-        width: 100%;
-      }
-    }
-  }
 }
 
-.card-tarjeta-personaje {
-  width: 170px;
+.contenedor-resultados .card {
+  width: 200px;
+  height: 380px;
+  background-color: white;
+  color: black;
+  margin: 10px;
+}
+
+.contenedor-resultados .card:hover .imagen img {
+  transform: translate(0, 20);
+}
+
+.contenedor-resultados .card h2 {
+  font-size: 12px;
+}
+
+.contenedor-resultados .card p {
+  font-size: 10px;
+}
+
+.contenedor-resultados .card .imagen {
+  height: 300px;
+  overflow: hidden;
+}
+
+.contenedor-resultados .card .imagen img {
+  height: 100%;
+}
+
+.contenedor-resultados .superheroe {
+  width: 200px;
   height: 380px;
   background-color: red;
-  margin: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  cursor: pointer;
-
-  &:hover {
-    .imagen {
-      img {
-        transform: scale(1.1);
-        transition: 0.2s;
-        overflow: hidden;
-      }
-    }
-    .info {
-      color: black;
-      background-color: red;
-      transition: 0.2s;
-    }
-  }
-
-  .imagen {
-    height: 66%;
-    overflow: hidden;
-    img {
-      width: 100%;
-    }
-  }
-
-  .info {
-    height: 33%;
-    background-color: black;
-    color: white;
-    @extend %font;
-    font-size: 10px;
-
-    .nombre {
-      margin-left: 15px;
-    }
-  }
 }
 
 .contenedor-detalle {
   display: flex;
   flex-direction: column;
+}
 
-  #info-detalle-primaria {
-    display: flex;
-    margin: 10px 0px 40px 0px;
+.contenedor-detalle #info-detalle-primaria {
+  display: flex;
+  margin: 10px 0px 30px 0px;
+}
 
-    #info-detalle-primaria-imagen {
-      width: 350px;
-      img {
-        width: 100%;
-      }
-    }
+.contenedor-detalle #info-detalle-primaria #info-detalle-primaria-data {
+  max-width: 600px;
+  margin-left: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
 
-    #info-detalle-primaria-data {
-      margin: 0 0 0 50px;
-      max-width: 600px;
-      @extend %font;
+.contenedor-detalle #info-detalle-primaria #info-detalle-primaria-data p {
+  font-size: 15px;
+}
 
-      p {
-        font-size: 15px;
-      }
-      h2 {
-        margin-top: 0px;
-      }
-    }
-  }
+.contenedor-detalle #info-detalle-secundaria {
+  background-color: blue;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 900px;
+}
 
-  #info-detalle-secundaria {
-    display: flex;
-    flex-wrap: wrap;
-    margin-bottom: 100px;
+.contenedor-detalle #info-detalle-secundaria #info-tarjeta-personaje {
+  margin: 10px;
+  background-color: red;
+}
 
-    #info-detalle-secundaria-resultados {
-      span {
-        display: block;
-        font-size: 12px;
-        color: gray;
-        font-weight: bold;
-        margin-right: 20px;
-      }
-    }
-
-    #info-tarjeta-personaje {
-      margin: 10px;
-    }
-  }
+.contenedor-detalle #info-detalle-secundaria #info-tarjeta-personaje #info-tarjeta-personaje-name {
+  background-color: yellow;
 }
 
 .paginador {
   height: 50px;
-  @extend %flex-centrado;
   margin-top: 10px;
   padding-bottom: 100px;
-  button {
-    width: 40px;
-    height: 40px;
-    background-color: black;
-    margin: 5px;
-    border: none;
-    border-style: none;
-    .fas {
-      color: white;
-      font-size: 20px;
-    }
-  }
+}
+
+.paginador button {
+  width: 40px;
+  height: 40px;
+  background-color: black;
+  margin: 5px;
+  border: none;
+  border-style: none;
+}
+
+.paginador button .fas {
+  color: white;
+  font-size: 20px;
 }
 
 footer {
-  background-color: rgb(0, 0, 0);
+  background-color: black;
   width: auto;
   height: 80px;
-  @extend %flex-centrado;
+}
 
-  p {
-    @extend %font;
-    font-weight: 600;
-    color: white;
-  }
+footer p {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-weight: 600;
+  color: white;
 }
 
 .oculto {
   display: none;
 }
+
+/*# sourceMappingURL=style.css.map */
+
+/*# sourceMappingURL=styles.scss.map */
