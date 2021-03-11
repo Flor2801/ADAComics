@@ -187,12 +187,11 @@ mostrarComics = (info) => {
   let comic = info.data.results;
   const resultados = document.getElementById("resultados");
   let totalComics = document.getElementById("filtrado");
- 
 
   totalComics.innerHTML = `${info.data.total}`;
 
   resultados.innerHTML = "";
- 
+
   comic.map((info) => {
     resultados.innerHTML += `<article class="card" data-id=${info.id}><div class="imagen"><img src="${info.thumbnail.path}/portrait_uncanny.${info.thumbnail.extension}" alt=""></div>
     <div class="info"><div class="nombre"><p>${info.title}</p></div></div></article>`;
@@ -301,8 +300,8 @@ mostrarPersonajes = (info) => {
         .then((info) => {
           let personajeSeleccionado = info.data.results;
 
-          paginador.classList.add("oculto")
-          masResultados.classList.remove("oculto")
+          paginador.classList.add("oculto");
+          masResultados.classList.remove("oculto");
 
           resultados.innerHTML = `<div class="contenedor-detalle">
           <div id="info-detalle-primaria">
@@ -321,29 +320,28 @@ mostrarPersonajes = (info) => {
            </div>
           `;
 
-      
-      fetch(
-        `https://gateway.marvel.com/v1/public/characters/${personaje.dataset.id}/comics?apikey=${apiKey}`
-      )
-        .then((res) => {
-          return res.json();
-        })
-        .then((info) => {
-          let participacionPersonaje = info.data.results;
+          fetch(
+            `https://gateway.marvel.com/v1/public/characters/${personaje.dataset.id}/comics?apikey=${apiKey}`
+          )
+            .then((res) => {
+              return res.json();
+            })
+            .then((info) => {
+              let participacionPersonaje = info.data.results;
 
-          let resultadosComics = document.getElementById(
-            "info-detalle-secundaria"
-          );
+              let resultadosComics = document.getElementById(
+                "info-detalle-secundaria"
+              );
 
-          let cantidadComics = document.getElementById("cantidadComics");
-          cantidadComics.innerHTML = `${info.data.total}`;
+              let cantidadComics = document.getElementById("cantidadComics");
+              cantidadComics.innerHTML = `${info.data.total}`;
 
-          participacionPersonaje.map((tarjetas) => {
-            return (resultadosComics.innerHTML += `<article class="card" data-id=${tarjetas.id}><div class="imagen"><img src="${tarjetas.thumbnail.path}/portrait_uncanny.${tarjetas.thumbnail.extension}" alt=""></div>
+              participacionPersonaje.map((tarjetas) => {
+                return (resultadosComics.innerHTML += `<article class="card" data-id=${tarjetas.id}><div class="imagen"><img src="${tarjetas.thumbnail.path}/portrait_uncanny.${tarjetas.thumbnail.extension}" alt=""></div>
             <div class="info"><div class="nombre"><p>${tarjetas.title}</p></div></div></article>`);
-          });
+              });
+            });
         });
-    });
     };
   });
-}
+};
