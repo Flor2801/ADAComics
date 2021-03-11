@@ -285,9 +285,10 @@ body {
     cursor: pointer;
     @extend %font;
 
-    @media (max-width: 750px) {
+    @media (max-width: 770px) {
       width: 150px;
       flex-wrap: wrap;
+      justify-content: center;
     }
 
     @media (max-width: 550px) {
@@ -337,8 +338,10 @@ body {
   flex-direction: column;
 
   @media (max-width: 550px) {
+    width: 100vw;
     margin-left: 20px;
   }
+  
 
   #info-detalle-primaria {
     display: flex;
@@ -350,12 +353,9 @@ body {
     }
 
     @media (max-width: 500px) {
-      margin-left: 25px;
+      margin-left: 15px;
     }
 
-    @media (max-width: 500px) {
-      margin-left: 100px;
-    }
 
     #info-detalle-primaria-imagen {
       width: 300px;
@@ -382,9 +382,13 @@ body {
       }
 
       @media (max-width: 700px) {
-        width: 400px;
+        width: 350px;
         margin-left: 0px;
         margin-top: 50px;
+      }
+
+      @media (max-width: 500px) {
+        margin-left: 0px;
       }
 
       p {
@@ -414,8 +418,8 @@ body {
     @media (max-width: 550px) {
       flex-wrap: wrap;
       justify-content: flex-start;
-      margin-left: 100px;
-      margin-right: 50px;
+      margin-left: 10px;
+      margin-right: 0px;
     }
 
   }
@@ -428,13 +432,14 @@ body {
 #info-detalle-secundaria-comics {
   display: flex;
   flex-wrap: wrap;
+
 }
 
 #info-detalle-secundaria-resultados {
   margin-bottom: 30px;
 
   @media (max-width: 500px) {
-    margin-left: 100px;
+    margin-left: 10px;
   }
 
   span {

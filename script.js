@@ -301,9 +301,6 @@ mostrarPersonajes = (info) => {
         .then((info) => {
           let personajeSeleccionado = info.data.results;
 
-          paginador.classList.add("oculto")
-          masResultados.classList.remove("oculto")
-
           resultados.innerHTML = `<div class="contenedor-detalle">
           <div id="info-detalle-primaria">
           <div id="info-detalle-primaria-imagen"><img src="${personajeSeleccionado[0].thumbnail.path}/standard_fantastic.${personajeSeleccionado[0].thumbnail.extension}" alt=""></div>
