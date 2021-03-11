@@ -123,6 +123,11 @@ const filtradoInputLleno = (tipo, orden, texto) => {
 
 ////////////////////////  PAGINADO  //////////////////////////
 
+let mostrarPagina = document.getElementById("pagina-actual");
+let paginasTotales = document.getElementById("paginas-totales");
+const resultados = document.getElementById("resultados");
+let totalComics = document.getElementById("filtrado");
+
 botonPrimeraPagina.onclick = () => {
   paginaActual = 0;
   if (input.value === "") {
@@ -171,8 +176,6 @@ botonUltimaPagina.onclick = () => {
 botonBuscar.onclick = () => {
   paginaActual = 0;
   totalResultados.classList.remove("oculto");
-  ///////////// INPUT VACIO buscara por TIPO Y ORDEN
-  ///////////// INPUT LLENO buscara por TIPO, ORDEN Y TEXTO
   if (input.value === "") {
     filtradoInputVacio(tipo.value, orden.value);
   } else if (input.value !== "") {
@@ -185,11 +188,10 @@ let totalResultados = document.getElementById("total-resultado");
 
 mostrarComics = (info) => {
   let comic = info.data.results;
-  const resultados = document.getElementById("resultados");
-  let totalComics = document.getElementById("filtrado");
 
   totalComics.innerHTML = `${info.data.total}`;
-
+  mostrarPagina.innerHTML = paginaActual;
+  paginasTotales.innerHTML = Math.floor(info.data.total / 20);
   resultados.innerHTML = "";
 
   comic.map((info) => {
@@ -217,7 +219,8 @@ mostrarComics = (info) => {
           let comicSeleccionado = info.data.results[0];
           let fecha = comicSeleccionado.dates[0].date;
           let fechaCortada = fecha.slice(0, 10);
-
+        
+          
           resultados.innerHTML = `<div class="contenedor-detalle">
           <div id="info-detalle-primaria">
           <div id="info-detalle-primaria-imagen"><img src="${comicSeleccionado.thumbnail.path}/portrait_uncanny.${comicSeleccionado.thumbnail.extension}" alt=""></div>
@@ -270,10 +273,10 @@ mostrarComics = (info) => {
 
 mostrarPersonajes = (info) => {
   let personajes = info.data.results;
-  const resultados = document.getElementById("resultados");
-  const totalComics = document.getElementById("filtrado");
 
   totalComics.innerHTML = `${info.data.total}`;
+  mostrarPagina.innerHTML = paginaActual;
+  paginasTotales.innerHTML = Math.floor(info.data.total / 20);
   resultados.innerHTML = "";
 
   personajes.map((info) => {
