@@ -6,13 +6,18 @@ footer, .paginador, .titulo {
 }
 
 .contenedor-resultados, .total-resultado, .caja-filtros {
-  margin-left: 50px;
-  margin-right: 50px;
+  margin-left: 100px;
+  margin-right: 100px;
 }
 
 body {
   margin: 0px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+h1 {
+  font-size: 23px;
+  font-weight: bold;
 }
 
 .titulo {
@@ -52,14 +57,38 @@ body {
 .caja-filtros .contenedor-filtros {
   display: flex;
   direction: wrap;
-  justify-content: space-between;
+  position: absolute;
 }
 .caja-filtros .contenedor-filtros .filtros {
   display: flex;
 }
 .caja-filtros .contenedor-filtros .search-texto .fas {
   color: black;
-  font-size: 30px;
+  font-size: 20px;
+  position: relative;
+  left: 30px;
+}
+.caja-filtros .contenedor-filtros .search-texto ::placeholder {
+  color: #7e7e7e;
+  font-size: 20px;
+  margin-left: 50px;
+}
+.caja-filtros .contenedor-filtros .search-texto #busqueda-por-texto {
+  width: 600px;
+  height: 50px;
+  border: none;
+  border-bottom: solid black 2px;
+}
+
+.total-resultado {
+  margin-bottom: 30px;
+  margin-top: 100px;
+}
+.total-resultado span {
+  font-size: 13px;
+  color: gray;
+  font-weight: bold;
+  margin-right: 20px;
 }
 
 .contenedor-resultados {
@@ -71,31 +100,25 @@ body {
 .contenedor-resultados .card {
   width: 200px;
   height: 380px;
-  background-color: black;
-  color: white;
+  background-color: white;
+  color: black;
   margin: 10px;
 }
-.contenedor-resultados .card:hover {
-  background-color: red;
-}
-.contenedor-resultados .card:hover .imagen {
-  overflow: hidden;
-}
 .contenedor-resultados .card:hover .imagen img {
-  transform: scale(1.2);
+  transform: translate(0, 20);
 }
 .contenedor-resultados .card h2 {
-  font-size: 15px;
+  font-size: 12px;
 }
 .contenedor-resultados .card p {
   font-size: 10px;
 }
 .contenedor-resultados .card .imagen {
-  height: 250px;
+  height: 300px;
   overflow: hidden;
 }
 .contenedor-resultados .card .imagen img {
-  height: 80%;
+  height: 100%;
 }
 .contenedor-resultados .superheroe {
   width: 200px;
@@ -130,6 +153,10 @@ footer p {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-weight: 600;
   color: white;
+}
+
+.oculto {
+  display: none;
 }
 
 /*# sourceMappingURL=style.css.map */
