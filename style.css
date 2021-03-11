@@ -276,10 +276,11 @@ body h1 {
   margin-bottom: 50px;
   cursor: pointer;
 }
-@media (max-width: 750px) {
+@media (max-width: 770px) {
   .contenedor-resultados .card {
     width: 150px;
     flex-wrap: wrap;
+    justify-content: center;
   }
 }
 @media (max-width: 550px) {
@@ -320,6 +321,7 @@ body h1 {
 }
 @media (max-width: 550px) {
   .contenedor-detalle {
+    width: 100vw;
     margin-left: 20px;
   }
 }
@@ -335,12 +337,7 @@ body h1 {
 }
 @media (max-width: 500px) {
   .contenedor-detalle #info-detalle-primaria {
-    margin-left: 25px;
-  }
-}
-@media (max-width: 500px) {
-  .contenedor-detalle #info-detalle-primaria {
-    margin-left: 100px;
+    margin-left: 15px;
   }
 }
 .contenedor-detalle #info-detalle-primaria #info-detalle-primaria-imagen {
@@ -370,9 +367,14 @@ body h1 {
 }
 @media (max-width: 700px) {
   .contenedor-detalle #info-detalle-primaria #info-detalle-primaria-data {
-    width: 400px;
+    width: 350px;
     margin-left: 0px;
     margin-top: 50px;
+  }
+}
+@media (max-width: 500px) {
+  .contenedor-detalle #info-detalle-primaria #info-detalle-primaria-data {
+    margin-left: 0px;
   }
 }
 .contenedor-detalle #info-detalle-primaria #info-detalle-primaria-data p {
@@ -401,8 +403,8 @@ body h1 {
   .contenedor-detalle #info-detalle-secundaria {
     flex-wrap: wrap;
     justify-content: flex-start;
-    margin-left: 100px;
-    margin-right: 50px;
+    margin-left: 10px;
+    margin-right: 0px;
   }
 }
 .contenedor-detalle #info-tarjeta-personaje {
@@ -419,7 +421,7 @@ body h1 {
 }
 @media (max-width: 500px) {
   #info-detalle-secundaria-resultados {
-    margin-left: 100px;
+    margin-left: 10px;
   }
 }
 #info-detalle-secundaria-resultados span {
