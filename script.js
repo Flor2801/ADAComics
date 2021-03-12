@@ -7,6 +7,9 @@ fetch(
   })
   .then((info) => {
     mostrarComics(info);
+   
+    chequearBotonesIniciales();
+  
   });
 
 ////////////////////////   FILTROS DE BUSQUEDA  ////////////////////////
@@ -123,6 +126,10 @@ const filtradoInputLleno = (tipo, orden, texto) => {
 
 ////////////////////////  PAGINADO  //////////////////////////
 
+let verPaginaActual = document.getElementById("pagina-actual")
+let paginasTotales = document.getElementById("paginas-totales")
+
+
 botonPrimeraPagina.onclick = () => {
   paginaActual = 0;
   if (input.value === "") {
@@ -181,14 +188,20 @@ botonBuscar.onclick = () => {
 };
 
 ///////////////// FUNCION PARA CREAR LAS TARJETAS CUANDO LA OPCION ELEGIDA SON COMICS /////////////////
+
 let totalResultados = document.getElementById("total-resultado");
+
 
 mostrarComics = (info) => {
   let comic = info.data.results;
   const resultados = document.getElementById("resultados");
   let totalComics = document.getElementById("filtrado");
-
+  
+  verPaginaActual.innerHTML = paginaActual
+  paginasTotales.innerHTML = Math.floor(info.data.total/20)
   totalComics.innerHTML = `${info.data.total}`;
+  let offset = info.data.offset;
+  let cantidadTotal = info.data.total;
 
   resultados.innerHTML = "";
 
@@ -196,6 +209,11 @@ mostrarComics = (info) => {
     resultados.innerHTML += `<article class="card" data-id=${info.id}><div class="imagen"><img src="${info.thumbnail.path}/portrait_uncanny.${info.thumbnail.extension}" alt=""></div>
     <div class="info"><div class="nombre"><p>${info.title}</p></div></div></article>`;
   });
+
+  chequearBotonesIniciales();
+  chequearBotonesFinales(offset, cantidadTotal);
+
+  
 
   const tarjeta = document.querySelectorAll(".card");
 
@@ -272,14 +290,23 @@ mostrarPersonajes = (info) => {
   let personajes = info.data.results;
   const resultados = document.getElementById("resultados");
   const totalComics = document.getElementById("filtrado");
-
+  
+  verPaginaActual.innerHTML = paginaActual
+  paginasTotales.innerHTML = Math.floor(info.data.total/20)
   totalComics.innerHTML = `${info.data.total}`;
   resultados.innerHTML = "";
+  
+  let offset = info.data.offset;
+  let cantidadTotal = info.data.total;
 
   personajes.map((info) => {
     resultados.innerHTML += `<article class="card-tarjeta-personaje" data-id=${info.id}><div class="imagen"><img src="${info.thumbnail.path}/portrait_incredible.${info.thumbnail.extension}" alt=""></div>
     <div class="info"> <div class="nombre"><h2>${info.name}</h2></div></div></article>`;
   });
+
+  chequearBotonesIniciales();
+  chequearBotonesFinales(offset, cantidadTotal);
+
 
   /// VER DETALLE DE PERSONAJE ///
 
@@ -341,4 +368,35 @@ mostrarPersonajes = (info) => {
         });
     };
   });
+};
+
+///////////////////// DESHABILITAR PAGINADO SI CORRESPONDE ////////////////////////
+
+
+const chequearBotonesIniciales = () => {
+  if (paginaActual === 0) {
+    botonPrimeraPagina.disabled = true;
+    botonPaginaAnterior.disabled = true;
+    botonPrimeraPagina.classList.add("disabled");
+    botonPaginaAnterior.classList.add("disabled");
+  } else {
+    botonPrimeraPagina.disabled = false;
+    botonPaginaAnterior.disabled = false;
+    botonPrimeraPagina.classList.add("disabled");
+    botonPaginaAnterior.classList.add("disabled");
+  }
+};
+
+const chequearBotonesFinales = (offset, total) => {
+  if (offset + 20 > total) {
+    botonUltimaPagina.disabled = true;
+    botonProximaPagina.disabled = true;
+    botonUltimaPagina.classList.add("disabled");
+    botonProximaPagina.classList.add("disabled");
+  } else {
+    botonUltimaPagina.disabled = false;
+    botonProximaPagina.disabled = false;
+    botonUltimaPagina.classList.add("disabled");
+    botonProximaPagina.classList.add("disabled");
+  }
 };
