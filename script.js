@@ -78,7 +78,6 @@ const filtradoInputVacio = (tipo, orden) => {
     });
 };
 
-
 /// Función para filtrar resultados con texto en el input
 const filtradoInputLleno = (tipo, orden, texto) => {
   if (tipo == "comics") {
@@ -112,7 +111,6 @@ const filtradoInputLleno = (tipo, orden, texto) => {
   }
 };
 
-
 ///////////////// EJECUCIÓN DE FILTROS DE BUSQUEDA  /////////////////
 
 botonBuscar.onclick = () => {
@@ -125,7 +123,6 @@ botonBuscar.onclick = () => {
     filtradoInputLleno(tipo.value, orden.value, input.value);
   }
 };
-
 
 ///////////////////// CREAR LAS TARJETAS CUANDO LA OPCION ELEGIDA SON COMICS //////////////////
 
@@ -152,8 +149,7 @@ mostrarComics = (info) => {
     <div class="info"><div class="nombre"><p>${info.title}</p></div></div></article>`;
   });
 
-  
- /// Función para mostrar el detalle al seleccionar un cómic
+  /// Función para mostrar el detalle al seleccionar un cómic
 
   const tarjeta = document.querySelectorAll(".card");
 
@@ -248,7 +244,6 @@ mostrarPersonajes = (info) => {
     <div class="info"> <div class="nombre"><h2>${info.name}</h2></div></div></article>`;
   });
 
-
   /// Función para mostrar el detalle al seleccionar un personaje
 
   const personaje = document.querySelectorAll("article");
@@ -260,6 +255,7 @@ mostrarPersonajes = (info) => {
       totalResultados.classList.add("oculto");
       piePaginador.classList.add("oculto");
       paginador.classList.add("oculto");
+      let vermas = 1;
 
       fetch(
         `https://gateway.marvel.com/v1/public/characters/${personaje.dataset.id}?apikey=${apiKey}`
@@ -305,12 +301,12 @@ mostrarPersonajes = (info) => {
                 return (resultadosComics.innerHTML += `<article class="card" data-id=${tarjetas.id}><div class="imagen"><img src="${tarjetas.thumbnail.path}/portrait_uncanny.${tarjetas.thumbnail.extension}" alt=""></div>
             <div class="info"><div class="nombre"><p>${tarjetas.title}</p></div></div></article>`);
               });
+
             });
         });
     };
   });
 };
-
 
 ////////////////////////  PAGINADO  //////////////////////////
 
@@ -323,8 +319,7 @@ let piePaginador = document.getElementById("ver-pagina-actual");
 let verPaginaActual = document.getElementById("pagina-actual");
 let paginasTotales = document.getElementById("paginas-totales");
 
-console.log(verPaginaActual)
-
+console.log(verPaginaActual);
 
 botonPrimeraPagina.onclick = () => {
   paginaActual = 0;
@@ -367,7 +362,6 @@ botonUltimaPagina.onclick = () => {
     filtradoInputLleno(tipo.value, orden.value, input.value);
   }
 };
-
 
 ///////////////////// DESHABILITAR PAGINADO SI CORRESPONDE ////////////////////////
 
