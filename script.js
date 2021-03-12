@@ -7,19 +7,17 @@ fetch(
   })
   .then((info) => {
     mostrarComics(info);
+    chequearBotonesIniciales();
   });
 
 ////////////////////////   FILTROS DE BUSQUEDA  ////////////////////////
 
-// Luego de enviado el form (boton buscar) el sistema comprueba si el usuario selecciono "Comics" o "Personajes",
-// Si el input esta vacio, sólo ordena de forma alfabetica o inversa.
-// Si el input tiene algo, entonces combina el texto de búsqueda con el el orden alfabético.
-
-/// SELECCIONAR FILTROS
+/// Menú de filtros: input de texto, comic/personaje, tipo de orden (alfabético o temporal)
 const tipo = document.getElementById("tipo-elegido");
 const orden = document.getElementById("orden-elegido");
 const input = document.getElementById("busqueda-por-texto");
 
+/// Cambio en opciones del menú según se seleccione cómics/peesonajes
 const cambiaOpcion = () => {
   if (tipo.value == "comics") {
     let opciones = orden.length;
@@ -46,27 +44,19 @@ const cambiaOpcion = () => {
   }
 };
 
-// boton primera pagina: pagina 1, offset 0 (pagina = total / 20) (offset numeros de pagina * 20)
-// boton anterior pagina: suma 1 pagina, multiplica pags por 20 (offset)
-// boton proxima pagina: suma 1 pagina, multiplica pags por 20 (offset)
-// boton ultima pagina: al total de resultados, le resta 20, hace offset con ese valor
+///////////////////// SECCION PRINCIPAL RESULTADOS /////////////////////
+
 let resultadosTotales = 0;
 let paginaActual = 0;
 let resultadosPorPagina = 20;
 let cantidadDePaginas = 0;
-const botonPrimeraPagina = document.getElementById("first");
-const botonPaginaAnterior = document.getElementById("previous");
-const botonProximaPagina = document.getElementById("next");
-const botonUltimaPagina = document.getElementById("last");
-const paginador = document.getElementById("paginador");
-const masResultados = document.getElementById("masresultados");
 
-// DATOS DE LA URL DEL FETCH DE MARVEL
+// Datos base de la URL para fetch a Marvel
 const urlBase = "https://gateway.marvel.com/v1/public/";
 const apiKey = "cdf503fce8f2c519f899f64cff25fd79";
 const botonBuscar = document.getElementById("buscar");
 
-// SI EL INPUT DE TEXTO ESTA VACIO buscara por TIPO Y ORDEN
+/// Función para filtrar resultados sin texto en el input
 const filtradoInputVacio = (tipo, orden) => {
   fetch(
     `${urlBase + tipo}?apikey=${apiKey}&orderBy=${orden}&offset=${
@@ -88,7 +78,8 @@ const filtradoInputVacio = (tipo, orden) => {
     });
 };
 
-// SI EL INPUT DE TEXTO ESTA LLENO buscara por TIPO, ORDEN, TEXTO
+
+/// Función para filtrar resultados con texto en el input
 const filtradoInputLleno = (tipo, orden, texto) => {
   if (tipo == "comics") {
     fetch(
@@ -121,58 +112,13 @@ const filtradoInputLleno = (tipo, orden, texto) => {
   }
 };
 
-////////////////////////  PAGINADO  //////////////////////////
 
-botonPrimeraPagina.onclick = () => {
-  paginaActual = 0;
-  if (input.value === "") {
-    filtradoInputVacio(tipo.value, orden.value);
-  } else if (input.value !== "") {
-    filtradoInputLleno(tipo.value, orden.value, input.value);
-  }
-  // botonPrimeraPagina.disabled = true;
-};
-
-botonPaginaAnterior.onclick = () => {
-  paginaActual--;
-  if (input.value === "") {
-    filtradoInputVacio(tipo.value, orden.value);
-  } else if (input.value !== "") {
-    filtradoInputLleno(tipo.value, orden.value, input.value);
-  }
-};
-
-botonProximaPagina.onclick = () => {
-  paginaActual++;
-  if (input.value === "") {
-    filtradoInputVacio(tipo.value, orden.value);
-  } else if (input.value !== "") {
-    filtradoInputLleno(tipo.value, orden.value, input.value);
-  }
-};
-
-botonUltimaPagina.onclick = () => {
-  cantidadDePaginas = resultadosTotales / resultadosPorPagina;
-  let resto = resultadosTotales % resultadosPorPagina;
-  if (resto > 0) {
-    paginaActual = Math.floor(cantidadDePaginas);
-  } else {
-    paginaActual = (resultadosTotales - resto) / resultadosPorPagina;
-  }
-  if (input.value === "") {
-    filtradoInputVacio(tipo.value, orden.value);
-  } else if (input.value !== "") {
-    filtradoInputLleno(tipo.value, orden.value, input.value);
-  }
-};
-
-///////////////// EJECUCION DE COMBINACIONES DE FILTROS DE BUSQUEDA  /////////////////
+///////////////// EJECUCIÓN DE FILTROS DE BUSQUEDA  /////////////////
 
 botonBuscar.onclick = () => {
   paginaActual = 0;
   totalResultados.classList.remove("oculto");
-  ///////////// INPUT VACIO buscara por TIPO Y ORDEN
-  ///////////// INPUT LLENO buscara por TIPO, ORDEN Y TEXTO
+
   if (input.value === "") {
     filtradoInputVacio(tipo.value, orden.value);
   } else if (input.value !== "") {
@@ -180,7 +126,9 @@ botonBuscar.onclick = () => {
   }
 };
 
-///////////////// FUNCION PARA CREAR LAS TARJETAS CUANDO LA OPCION ELEGIDA SON COMICS /////////////////
+
+///////////////////// CREAR LAS TARJETAS CUANDO LA OPCION ELEGIDA SON COMICS //////////////////
+
 let totalResultados = document.getElementById("total-resultado");
 
 mostrarComics = (info) => {
@@ -188,7 +136,14 @@ mostrarComics = (info) => {
   const resultados = document.getElementById("resultados");
   let totalComics = document.getElementById("filtrado");
 
+  verPaginaActual.innerHTML = paginaActual;
+  paginasTotales.innerHTML = Math.floor(info.data.total / 20);
   totalComics.innerHTML = `${info.data.total}`;
+  let offset = info.data.offset;
+  let cantidadTotal = info.data.total;
+
+  chequearBotonesIniciales();
+  chequearBotonesFinales(offset, cantidadTotal);
 
   resultados.innerHTML = "";
 
@@ -197,15 +152,19 @@ mostrarComics = (info) => {
     <div class="info"><div class="nombre"><p>${info.title}</p></div></div></article>`;
   });
 
-  const tarjeta = document.querySelectorAll(".card");
+  
+ /// Función para mostrar el detalle al seleccionar un cómic
 
-  /// VER DETALLE DE COMICS ///
+  const tarjeta = document.querySelectorAll(".card");
 
   tarjeta.forEach((tarjeta) => {
     tarjeta.onclick = () => {
       resultados.innerHTML = "";
       totalComics.innerHTML = "";
       totalResultados.classList.add("oculto");
+
+      piePaginador.classList.add("oculto");
+      paginador.classList.add("oculto");
 
       fetch(
         `https://gateway.marvel.com/v1/public/comics/${tarjeta.dataset.id}?apikey=${apiKey}`
@@ -266,22 +225,31 @@ mostrarComics = (info) => {
   });
 };
 
-// FUNCION PARA CREAR LAS TARJETAS CUANDO LA OPCION ELEGIDA SON PERSONAJES //
+///////////////////// CREAR LAS TARJETAS CUANDO LA OPCION ELEGIDA SON PERSONAJES //////////////////
 
 mostrarPersonajes = (info) => {
   let personajes = info.data.results;
   const resultados = document.getElementById("resultados");
   const totalComics = document.getElementById("filtrado");
 
+  verPaginaActual.innerHTML = paginaActual;
+  paginasTotales.innerHTML = Math.floor(info.data.total / 20);
   totalComics.innerHTML = `${info.data.total}`;
   resultados.innerHTML = "";
+
+  let offset = info.data.offset;
+  let cantidadTotal = info.data.total;
+
+  chequearBotonesIniciales();
+  chequearBotonesFinales(offset, cantidadTotal);
 
   personajes.map((info) => {
     resultados.innerHTML += `<article class="card-tarjeta-personaje" data-id=${info.id}><div class="imagen"><img src="${info.thumbnail.path}/portrait_incredible.${info.thumbnail.extension}" alt=""></div>
     <div class="info"> <div class="nombre"><h2>${info.name}</h2></div></div></article>`;
   });
 
-  /// VER DETALLE DE PERSONAJE ///
+
+  /// Función para mostrar el detalle al seleccionar un personaje
 
   const personaje = document.querySelectorAll("article");
 
@@ -290,6 +258,8 @@ mostrarPersonajes = (info) => {
       resultados.innerHTML = "";
       totalComics.innerHTML = 0;
       totalResultados.classList.add("oculto");
+      piePaginador.classList.add("oculto");
+      paginador.classList.add("oculto");
 
       fetch(
         `https://gateway.marvel.com/v1/public/characters/${personaje.dataset.id}?apikey=${apiKey}`
@@ -303,10 +273,8 @@ mostrarPersonajes = (info) => {
           resultados.innerHTML = `<div class="contenedor-detalle">
           <div id="info-detalle-primaria">
           <div id="info-detalle-primaria-imagen"><img src="${personajeSeleccionado[0].thumbnail.path}/standard_fantastic.${personajeSeleccionado[0].thumbnail.extension}" alt=""></div>
-            <div id="info-detalle-primaria-data">
-            <h2>${personajeSeleccionado[0].name}</h2>
-            <p>${personajeSeleccionado[0].description}</p></div>
-           </div> 
+            <div id="info-detalle-primaria-data"><h2>${personajeSeleccionado[0].name}</h2><p>${personajeSeleccionado[0].description}</p></div>
+          </div> 
            <div id="info-detalle-secundaria-resultados"><h2>Comics</h2>
            <p><span id="cantidadComics">0</span><span>RESULTADOS</span></p></div>
 
@@ -341,4 +309,92 @@ mostrarPersonajes = (info) => {
         });
     };
   });
+};
+
+
+////////////////////////  PAGINADO  //////////////////////////
+
+const botonPrimeraPagina = document.getElementById("first");
+const botonPaginaAnterior = document.getElementById("previous");
+const botonProximaPagina = document.getElementById("next");
+const botonUltimaPagina = document.getElementById("last");
+const paginador = document.getElementById("paginador");
+let piePaginador = document.getElementById("ver-pagina-actual");
+let verPaginaActual = document.getElementById("pagina-actual");
+let paginasTotales = document.getElementById("paginas-totales");
+
+console.log(verPaginaActual)
+
+
+botonPrimeraPagina.onclick = () => {
+  paginaActual = 0;
+  if (input.value === "") {
+    filtradoInputVacio(tipo.value, orden.value);
+  } else if (input.value !== "") {
+    filtradoInputLleno(tipo.value, orden.value, input.value);
+  }
+};
+
+botonPaginaAnterior.onclick = () => {
+  paginaActual--;
+  if (input.value === "") {
+    filtradoInputVacio(tipo.value, orden.value);
+  } else if (input.value !== "") {
+    filtradoInputLleno(tipo.value, orden.value, input.value);
+  }
+};
+
+botonProximaPagina.onclick = () => {
+  paginaActual++;
+  if (input.value === "") {
+    filtradoInputVacio(tipo.value, orden.value);
+  } else if (input.value !== "") {
+    filtradoInputLleno(tipo.value, orden.value, input.value);
+  }
+};
+
+botonUltimaPagina.onclick = () => {
+  cantidadDePaginas = resultadosTotales / resultadosPorPagina;
+  let resto = resultadosTotales % resultadosPorPagina;
+  if (resto > 0) {
+    paginaActual = Math.floor(cantidadDePaginas);
+  } else {
+    paginaActual = (resultadosTotales - resto) / resultadosPorPagina;
+  }
+  if (input.value === "") {
+    filtradoInputVacio(tipo.value, orden.value);
+  } else if (input.value !== "") {
+    filtradoInputLleno(tipo.value, orden.value, input.value);
+  }
+};
+
+
+///////////////////// DESHABILITAR PAGINADO SI CORRESPONDE ////////////////////////
+
+const chequearBotonesIniciales = () => {
+  if (paginaActual === 0) {
+    botonPrimeraPagina.disabled = true;
+    botonPaginaAnterior.disabled = true;
+    botonPrimeraPagina.classList.add("disabled");
+    botonPaginaAnterior.classList.add("disabled");
+  } else {
+    botonPrimeraPagina.disabled = false;
+    botonPaginaAnterior.disabled = false;
+    botonPrimeraPagina.classList.add("disabled");
+    botonPaginaAnterior.classList.add("disabled");
+  }
+};
+
+const chequearBotonesFinales = (offset, total) => {
+  if (offset + 20 > total) {
+    botonUltimaPagina.disabled = true;
+    botonProximaPagina.disabled = true;
+    botonUltimaPagina.classList.add("disabled");
+    botonProximaPagina.classList.add("disabled");
+  } else {
+    botonUltimaPagina.disabled = false;
+    botonProximaPagina.disabled = false;
+    botonUltimaPagina.classList.add("disabled");
+    botonProximaPagina.classList.add("disabled");
+  }
 };
