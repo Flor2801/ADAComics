@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Bangers&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");
-footer, .paginador, .titulo {
+.vista-extra-detalle, footer, .paginador, .titulo {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,7 +11,7 @@ footer, .paginador, .titulo {
   margin-right: 100px;
 }
 
-.contenedor-detalle #info-detalle-primaria #info-detalle-primaria-data, .contenedor-resultados .card .info .nombre, .contenedor-resultados .card, .caja-filtros .contenedor-filtros .filtros #buscar, .caja-filtros .contenedor-filtros .filtros form select, .caja-filtros .contenedor-filtros .filtros, body {
+.vista-extra-detalle .mas-resultados, .contenedor-detalle #info-detalle-primaria #info-detalle-primaria-data, .contenedor-resultados .card .info .nombre, .contenedor-resultados .card, .caja-filtros .contenedor-filtros .filtros #buscar, .caja-filtros .contenedor-filtros .filtros form select, .caja-filtros .contenedor-filtros .filtros, body {
   font-family: "Roboto", sans-serif;
 }
 
@@ -259,7 +259,7 @@ body h1 {
 }
 @media (max-width: 1200px) {
   .contenedor-resultados {
-    justify-content: flex-start;
+    justify-content: center;
   }
 }
 @media (max-width: 550px) {
@@ -305,9 +305,11 @@ body h1 {
 .contenedor-resultados .card .imagen {
   overflow: hidden;
   box-shadow: 0px 15px 20px -10px gray;
+  margin-bottom: 20px;
 }
 .contenedor-resultados .card .imagen img {
   width: 100%;
+  display: block;
 }
 .contenedor-resultados .superheroe {
   width: 200px;
@@ -391,7 +393,7 @@ body h1 {
 .contenedor-detalle #info-detalle-secundaria {
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: 150px;
+  margin-bottom: 50px;
   justify-content: flex-start;
 }
 @media (max-width: 1200px) {
@@ -495,6 +497,9 @@ body h1 {
   border: none;
   border-style: none;
 }
+.paginador button:hover {
+  background-color: red;
+}
 .paginador button .fas {
   color: white;
   font-size: 20px;
@@ -518,8 +523,30 @@ footer p {
   color: white;
 }
 
+.vista-extra-detalle {
+  margin-bottom: 100px;
+}
+.vista-extra-detalle .mas-resultados {
+  padding: 10px;
+  color: white;
+  background-color: black;
+  font-weight: 600;
+  font-size: 15px;
+  border-style: hidden;
+}
+.vista-extra-detalle .mas-resultados:hover {
+  color: white;
+  background-color: red;
+  outline: none;
+  cursor: pointer;
+}
+
 .oculto {
   display: none;
+}
+
+.deshabilitado {
+  background-color: grey;
 }
 
 /*# sourceMappingURL=style.css.map */
