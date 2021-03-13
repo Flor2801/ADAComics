@@ -4,7 +4,7 @@ Proyecto de base a replicar 👉 https://frontend-proyecto-comics.adaitw.org/
 Documentación API oficial de Marvel  👉  https://developer.marvel.com/
 
 # Tecnologías 💾
-HTML5, Css, Sass y Git. 
+HTML5, Css, Javascript, Sass y Git. 
 
 # Deploy 📁
 Puede verse el proyecto terminado en el siguiente link 👉 https://flor2801.github.io/ADAComics/
