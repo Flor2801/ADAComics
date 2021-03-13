@@ -12,6 +12,6 @@ Puede verse el proyecto terminado en el siguiente link 👉 https://flor2801.git
 # Preview 
 ![image](https://user-images.githubusercontent.com/66267602/111052011-16c45c80-8436-11eb-9d91-ae6663244a0b.png)
 
-# Gracias 😃 espero que lo disfrutes! 
+## Gracias 😃 espero que lo disfrutes! 
 Desarrollado por Florencia Sarria. ✍️ ❤️
 
