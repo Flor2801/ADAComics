@@ -139,7 +139,7 @@ mostrarComics = (info) => {
   let totalComics = document.getElementById("filtrado");
 
   verPaginaActual.innerHTML = Number(paginaActual + 1);
-  paginasTotales.innerHTML = Math.floor(info.data.total / 20);
+  paginasTotales.innerHTML = (Math.floor(info.data.total / 20) + 1);
   totalComics.innerHTML = `${info.data.total}`;
   let offset = info.data.offset;
   let cantidadTotal = info.data.total;
@@ -258,7 +258,7 @@ mostrarPersonajes = (info) => {
   const totalComics = document.getElementById("filtrado");
 
   verPaginaActual.innerHTML = Number(paginaActual + 1);
-  paginasTotales.innerHTML = Math.floor(info.data.total / 20);
+  paginasTotales.innerHTML = (Math.floor(info.data.total / 20)) + 1;
   totalComics.innerHTML = `${info.data.total}`;
   resultados.innerHTML = "";
 
@@ -406,7 +406,7 @@ botonUltimaPagina.onclick = () => {
   cantidadDePaginas = resultadosTotales / resultadosPorPagina;
   let resto = resultadosTotales % resultadosPorPagina;
   if (resto > 0) {
-    paginaActual = Math.floor(cantidadDePaginas) - 1;
+    paginaActual = Math.floor(cantidadDePaginas);
   } else {
     paginaActual = (resultadosTotales - resto) / resultadosPorPagina;
   }
