@@ -10,7 +10,9 @@ HTML5, Css, Javascript, Sass y Git.
 Puede verse el proyecto terminado en el siguiente link 👉 https://flor2801.github.io/ADAComics/
 
 # Preview 
-![image](https://user-images.githubusercontent.com/66267602/111052011-16c45c80-8436-11eb-9d91-ae6663244a0b.png)
+![image](https://user-images.githubusercontent.com/66267602/111052411-3d37c700-8439-11eb-89d3-61605a0ffabf.png)
+
+
 
 ## Gracias 😃 espero que lo disfrutes! 
 Desarrollado por Florencia Sarria. ✍️ ❤️
