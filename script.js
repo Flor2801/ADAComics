@@ -112,7 +112,7 @@ const filtradoInputLleno = (tipo, orden, texto) => {
 };
 
 ///////////////// EJECUCIÓN DE FILTROS DE BUSQUEDA  /////////////////
-let botonMas = document.getElementById("vista-extra-detalle")
+let botonMas = document.getElementById("vista-extra-detalle");
 
 botonBuscar.onclick = () => {
   paginaActual = 0;
@@ -132,7 +132,6 @@ botonBuscar.onclick = () => {
 
 let totalResultados = document.getElementById("total-resultado");
 let mas = document.getElementById("mas-resultados");
-
 
 mostrarComics = (info) => {
   let comic = info.data.results;
@@ -166,7 +165,6 @@ mostrarComics = (info) => {
       totalResultados.classList.add("oculto");
       piePaginador.classList.add("oculto");
       paginador.classList.add("oculto");
-      botonMas.classList.remove("oculto");
 
       fetch(
         `https://gateway.marvel.com/v1/public/comics/${tarjeta.dataset.id}?apikey=${apiKey}`
@@ -217,6 +215,10 @@ mostrarComics = (info) => {
               );
               cantidadPersonajes.innerHTML = `${info.data.total}`;
 
+              if (info.data.total > 20) {
+                botonMas.classList.remove("oculto");
+              }
+
               personaje.map((tarjetas) => {
                 return (resultadosPersonajes.innerHTML += `<div class="card-tarjeta-personaje" data-id=${tarjeta.id}><div class="imagen"><img src="${tarjetas.thumbnail.path}/portrait_incredible.${tarjetas.thumbnail.extension}" alt=""></div>
               <div class="info"> <div class="nombre"><h2>${tarjetas.name}</h2></div></div></div>`);
@@ -224,11 +226,11 @@ mostrarComics = (info) => {
 
               mas.onclick = () => {
                 vermas++;
-             
 
-                
                 fetch(
-                  `https://gateway.marvel.com/v1/public/comics/${tarjeta.dataset.id}/characters?apikey=${apiKey}&limit=${vermas * 20}`
+                  `https://gateway.marvel.com/v1/public/comics/${
+                    tarjeta.dataset.id
+                  }/characters?apikey=${apiKey}&limit=${vermas * 20}`
                 )
                   .then((res) => {
                     return res.json();
@@ -282,7 +284,6 @@ mostrarPersonajes = (info) => {
       totalResultados.classList.add("oculto");
       piePaginador.classList.add("oculto");
       paginador.classList.add("oculto");
-      botonMas.classList.remove("oculto");
 
       let vermas = 1;
 
@@ -319,6 +320,10 @@ mostrarPersonajes = (info) => {
             .then((info) => {
               let participacionPersonaje = info.data.results;
 
+              if (info.data.total > 20) {
+                botonMas.classList.remove("oculto");
+              }
+
               let resultadosComics = document.getElementById(
                 "info-detalle-secundaria"
               );
@@ -331,28 +336,26 @@ mostrarPersonajes = (info) => {
             <div class="info"><div class="nombre"><p>${tarjetas.title}</p></div></div></article>`);
               });
 
-
               mas.onclick = () => {
-                             vermas++;
-                
-                             fetch(
-                               `https://gateway.marvel.com/v1/public/characters/${
-                                 personaje.dataset.id
-                               }/comics?apikey=${apiKey}&limit=${vermas * 20}`
-                             )
-                               .then((res) => {
-                                 return res.json();
-                               })
-                               .then((info) => {
-                                 resultadosComics.innerHTML = "";
-                                 participacionPersonaje = info.data.results;
-                                 participacionPersonaje.map((tarjetas) => {
-                                   return (resultadosComics.innerHTML += `<article class="card" data-id=${tarjetas.id}><div class="imagen"><img src="${tarjetas.thumbnail.path}/portrait_uncanny.${tarjetas.thumbnail.extension}" alt=""></div>
-                               <div class="info"><div class="nombre"><p>${tarjetas.title}</p></div></div></article>`);
-                                 });
-                               });
-                           };
+                vermas++;
 
+                fetch(
+                  `https://gateway.marvel.com/v1/public/characters/${
+                    personaje.dataset.id
+                  }/comics?apikey=${apiKey}&limit=${vermas * 20}`
+                )
+                  .then((res) => {
+                    return res.json();
+                  })
+                  .then((info) => {
+                    resultadosComics.innerHTML = "";
+                    participacionPersonaje = info.data.results;
+                    participacionPersonaje.map((tarjetas) => {
+                      return (resultadosComics.innerHTML += `<article class="card" data-id=${tarjetas.id}><div class="imagen"><img src="${tarjetas.thumbnail.path}/portrait_uncanny.${tarjetas.thumbnail.extension}" alt=""></div>
+                               <div class="info"><div class="nombre"><p>${tarjetas.title}</p></div></div></article>`);
+                    });
+                  });
+              };
             });
         });
     };
@@ -370,8 +373,6 @@ let piePaginador = document.getElementById("ver-pagina-actual");
 let verPaginaActual = document.getElementById("pagina-actual");
 let paginasTotales = document.getElementById("paginas-totales");
 
-
-
 botonPrimeraPagina.onclick = () => {
   paginaActual = 0;
   if (input.value === "") {
@@ -383,7 +384,7 @@ botonPrimeraPagina.onclick = () => {
 
 botonPaginaAnterior.onclick = () => {
   paginaActual--;
- 
+
   if (input.value === "") {
     filtradoInputVacio(tipo.value, orden.value);
   } else if (input.value !== "") {
@@ -402,7 +403,6 @@ botonProximaPagina.onclick = () => {
 };
 
 botonUltimaPagina.onclick = () => {
-
   cantidadDePaginas = resultadosTotales / resultadosPorPagina;
   let resto = resultadosTotales % resultadosPorPagina;
   if (resto > 0) {
