@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
+    <!-- Esta ruta no funciona, no tenes esa carpeta en tu codigo. Y por lo que veo,
+    no usas bootstrap aca. Por que agregaste esto? -->
     <link rel="stylesheet" href="path/to/bootstrap/css/bootstrap.min.css" />
     <link rel="icon" href="favicon-32x32.png" />
     <link
@@ -17,6 +19,8 @@
     <!-- HOME PRINCIPAL -->
     <section class="home">
       <div class="titulo">
+        <!-- No es necesario el div aqui. Por que esto es una p y no un h? 
+        Te diria que al ser el titulo de la pagina, esto deberia ser el h1.  -->
         <div><p>ADA Comics</p></div>
       </div>
       <div class="fondo"><img src="hero.jpg" /></div>
@@ -24,6 +28,9 @@
 
     <!-- FITROS -->
     <section class="caja-filtros">
+      <!-- Pensa que el h1 es la palabra principal de nuestra web. 
+      Lo que yo quiero que los usuarios busquen en google para encontrar mi pagina.  
+    El div alrededor del h1 no es necesario-->
       <div><h1>Búsqueda</h1></div>
 
       <div class="contenedor-filtros">
@@ -39,7 +46,11 @@
         <div class="filtros">
           <div>
             <form name="f1">
+              <!-- El form deberia incluir al input! -->
               <p>TIPO</p>
+              <!-- Preferimos asignar los eventos en JS, no aqui en el HTML. 
+              Recorda que siempre separamos las responsabilidades:
+              los eventos son trabajo de JS, no de HTML -->
               <select id="tipo-elegido" name="tipo" onchange="cambiaOpcion()">
                 <option value="comics">CÓMICS</option>
                 <option value="characters">PERSONAJES</option>
@@ -62,7 +73,10 @@
 
     <!-- RESULTADOS -->
     <div class="total-resultado">
+      <!-- no dejamos clases vacias  -->
       <div class="" id="total-resultado">
+        <!-- No debemos tener mas de un h1 por pagina. Atencion a rodearlo de divs! 
+        Ya es un elemento en bloque, no lo necesita! -->
         <div><h1>Resultados</h1></div>
         <div><span id="filtrado">0</span><span>RESULTADOS</span></div>
       </div>
@@ -73,6 +87,8 @@
 
     <!-- PAGINADOR -->
     <div class="paginador" id="paginador">
+      <!-- no dejamos clases vacias -->
+      <!-- falta accesibilidad aca: un aria-label para que el usuario sepa que son estos botones -->
       <button class="" id="first"><i class="fas fa-angle-double-left"></i></button>
       <button class="" id="previous"><i class="fas fa-angle-left"></i></button>
       <button class="" id="next"><i class="fas fa-angle-right"></i></button>
