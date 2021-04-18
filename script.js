@@ -1,4 +1,7 @@
 // FECTH INCIAL PARA CARGAR LA PAGINA (muestra cómics)
+
+// por que no usamos la funcion filtradoInputVacio que ya tiene todo lo que necesitamos
+// en lugar de repetir innecesariamente un fetch?
 fetch(
   "https://gateway.marvel.com:443/v1/public/comics?apikey=cdf503fce8f2c519f899f64cff25fd79&orderBy=title&offset=0"
 )
@@ -12,6 +15,7 @@ fetch(
 
 ////////////////////////   FILTROS DE BUSQUEDA  ////////////////////////
 
+// Las variables deberian estar arriba de todo
 /// Menú de filtros: input de texto, comic/personaje, tipo de orden (alfabético o temporal)
 const tipo = document.getElementById("tipo-elegido");
 const orden = document.getElementById("orden-elegido");
@@ -51,6 +55,7 @@ let paginaActual = 0;
 let resultadosPorPagina = 20;
 let cantidadDePaginas = 0;
 
+// Como minimo, estos datos se deberian haber usado para el fetch inicial
 // Datos base de la URL para fetch a Marvel
 const urlBase = "https://gateway.marvel.com/v1/public/";
 const apiKey = "cdf503fce8f2c519f899f64cff25fd79";
@@ -72,6 +77,8 @@ const filtradoInputVacio = (tipo, orden) => {
 
         mostrarComics(info);
       } else if (tipo == "characters") {
+        // declaras dos veces esta variable, podria estar arriba del if y funcionaria perfecto
+        // Y al final no la usas: en ambas funciones usas info.data.total
         resultadosTotales = info.data.total;
         mostrarPersonajes(info);
       }
@@ -79,6 +86,27 @@ const filtradoInputVacio = (tipo, orden) => {
 };
 
 /// Función para filtrar resultados con texto en el input
+// Podriamos hacer esta funcion (y otras) mas breve y clara:
+// const filtradoInputLleno = (tipo, orden, texto) => {
+//   const paramDeBusqueda = tipo === comics ? "titleStartsWith" : "nameStartsWith"
+//   const accionATomar = tipo === comics ? mostrarComics : mostrarPersonajes
+//   fetch(
+//     `${
+//       urlBase + tipo
+//     }?apikey=${apiKey}&orderBy=${orden}&${paramDeBusqueda}=${texto}&offset=${
+//       paginaActual * 20
+//     }`
+//   )
+//     .then((res) => {
+//       return res.json();
+//     })
+//     .then((info) => {
+//       resultadosTotales = info.data.total;
+//       accionATomar(info);
+//     });
+// };
+
+
 const filtradoInputLleno = (tipo, orden, texto) => {
   if (tipo == "comics") {
     fetch(
@@ -121,8 +149,11 @@ botonBuscar.onclick = () => {
   paginador.classList.remove("oculto");
   botonMas.classList.add("oculto");
 
+  // if (!input.value) es preferible
   if (input.value === "") {
     filtradoInputVacio(tipo.value, orden.value);
+    // por que else if? si input.value NO es vacio, ya sabemos que aqui
+    // entrara el input NO vacio. Con un else alcanza y sobra
   } else if (input.value !== "") {
     filtradoInputLleno(tipo.value, orden.value, input.value);
   }
@@ -150,6 +181,7 @@ mostrarComics = (info) => {
   resultados.innerHTML = "";
 
   comic.map((info) => {
+    // el alt solo se deja vacio si es un elemento decorativo. aqui tiene que ir el title del comic
     resultados.innerHTML += `<article class="card" data-id=${info.id}><div class="imagen"><img src="${info.thumbnail.path}/portrait_uncanny.${info.thumbnail.extension}" alt=""></div>
     <div class="info"><div class="nombre"><p>${info.title}</p></div></div></article>`;
   });
@@ -162,6 +194,8 @@ mostrarComics = (info) => {
     tarjeta.onclick = () => {
       resultados.innerHTML = "";
       totalComics.innerHTML = "";
+      // Cinco veces a lo largo de tu codigo repetis estas tres ordenes una 
+      // despues de la otra. Por que no mejor hacer una funcion que sea "ocultarPaginado", por ej?
       totalResultados.classList.add("oculto");
       piePaginador.classList.add("oculto");
       paginador.classList.add("oculto");
@@ -177,6 +211,7 @@ mostrarComics = (info) => {
           let fecha = comicSeleccionado.dates[0].date;
           let fechaCortada = fecha.slice(0, 10);
 
+          // aqui deberiamos chequear que pasa si los datos vienen vacios o null
           resultados.innerHTML = `<div class="contenedor-detalle">
           <div id="info-detalle-primaria">
           <div id="info-detalle-primaria-imagen"><img src="${comicSeleccionado.thumbnail.path}/portrait_uncanny.${comicSeleccionado.thumbnail.extension}" alt=""></div>
@@ -220,6 +255,7 @@ mostrarComics = (info) => {
               }
 
               personaje.map((tarjetas) => {
+                // alt!
                 return (resultadosPersonajes.innerHTML += `<div class="card-tarjeta-personaje" data-id=${tarjeta.id}><div class="imagen"><img src="${tarjetas.thumbnail.path}/portrait_incredible.${tarjetas.thumbnail.extension}" alt=""></div>
               <div class="info"> <div class="nombre"><h2>${tarjetas.name}</h2></div></div></div>`);
               });
@@ -287,6 +323,8 @@ mostrarPersonajes = (info) => {
 
       let vermas = 1;
 
+      // mismos comentarios que antes aqui: la funcion puede ser mas breve usando variables 
+      // sin depender de if/else, necesitas alt en las imagenes, etc
       fetch(
         `https://gateway.marvel.com/v1/public/characters/${personaje.dataset.id}?apikey=${apiKey}`
       )
@@ -373,6 +411,8 @@ let piePaginador = document.getElementById("ver-pagina-actual");
 let verPaginaActual = document.getElementById("pagina-actual");
 let paginasTotales = document.getElementById("paginas-totales");
 
+// cuatro veces el mismo codigo repetido en cada uno de los botones
+// esto pide a gritos ser separado en una funcion reutilizable!
 botonPrimeraPagina.onclick = () => {
   paginaActual = 0;
   if (input.value === "") {
